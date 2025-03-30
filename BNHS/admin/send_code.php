@@ -7,11 +7,7 @@ if (isset($_POST['add'])) {
     if (empty($_POST["admin_phoneno"]) || empty($_POST["admin_id"]) || empty($_POST["admin_name"]) || empty($_POST['admin_email']) || empty($_POST['admin_password'])) {
         $err = "Blank Values Not Accepted";
     } else {
-        $admin_name = $_POST['admin_name'];
-        $admin_phoneno = $_POST['admin_phoneno'];
         $admin_email = $_POST['admin_email'];
-        $admin_password = sha1(md5($_POST['admin_password'])); // Hash This
-        $admin_id = $_POST['admin_id'];
 
         // Insert Captured Information into the Database Table
         $postQuery = "INSERT INTO bnhs_admin (admin_id, admin_name, admin_phoneno, admin_email, admin_password) VALUES(?,?,?,?,?)";
