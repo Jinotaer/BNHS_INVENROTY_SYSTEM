@@ -6,6 +6,8 @@ if (isset($_POST['add'])) {
     // Prevent Posting Blank Values
     if (empty($_POST["admin_phoneno"]) || empty($_POST["admin_id"]) || empty($_POST["admin_name"]) || empty($_POST['admin_email']) || empty($_POST['admin_password'])) {
         $err = "Blank Values Not Accepted";
+    } elseif (strlen($_POST['admin_password']) < 8) { // Validate password length
+        $err = "Password must be at least 8 characters long.";
     } else {
         $admin_name = $_POST['admin_name'];
         $admin_phoneno = $_POST['admin_phoneno'];

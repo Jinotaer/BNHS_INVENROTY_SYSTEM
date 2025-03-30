@@ -214,3 +214,25 @@ aside .sidebar .mode-toggler .toggle-switch{
 
 
 
+CREATE TABLE verification_codes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255) NOT NULL,
+    code VARCHAR(6) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+Ensure Composer is Installed
+If you don’t have Composer installed, download and install it from getcomposer.org.
+
+Navigate to Your Project Directory
+Open a terminal or command prompt and go to your project folder:
+cd /path/to/your/project
+
+Run the Composer Install Command
+composer require phpmailer/phpmailer
+
+Include PHPMailer in Your PHP Script
+Add the following line at the beginning of your PHP script:
+require 'vendor/autoload.php';
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
