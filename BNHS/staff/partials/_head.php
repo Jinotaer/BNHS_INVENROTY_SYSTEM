@@ -27,7 +27,7 @@
     <!-- Argon CSS -->
     <link type="text/css" href="assets/css/argon.css?v=1.0.0" rel="stylesheet">
     <script src="assets/js/swal.js"></script>
-    
+
     <!--Load Swal-->
     <?php if (isset($success)) { ?>
         <!--This code for injecting success alert-->
@@ -59,6 +59,29 @@
         </script>
 
     <?php } ?>
+    <!-- logout alert -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const logoutBtn = document.getElementById('logoutBtn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', function (e) {
+                    e.preventDefault(); // Prevent the default link behavior
+                    swal({
+                        title: "Are you sure?",
+                        text: "Do you wish to logout?",
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true,
+                    }).then((willLogout) => {
+                        if (willLogout) {
+                            // Redirect to the logout page
+                            window.location.href = logoutBtn.getAttribute('href');
+                        }
+                    });
+                });
+            }
+        });
+    </script>
     <script>
         function getCustomer(val) {
             $.ajax({
@@ -76,50 +99,49 @@
     </script>
 
     <style>
-      
+        /* Custom styles for sidebar */
+        /* Hover effect for sidebar links */
+        .navbar-nav .nav-link {
+            display: flex;
+            color: var(--color-info-dark);
+            gap: 1rem;
+            align-items: center;
+            position: relative;
+            /* height: 3.7rem; */
+        }
 
-/* Custom styles for sidebar */
-  /* Hover effect for sidebar links */
-  .navbar-nav .nav-link {
-    display: flex;
-    color: var(--color-info-dark);
-    gap: 1rem;
-    align-items: center;
-    position: relative;
-    /* height: 3.7rem; */
-}
+        .navbar-nav .nav-link:hover {
+            background-color: #f8f9fa;
+            color: #0056b3;
 
-.navbar-nav .nav-link:hover {
-    background-color: #f8f9fa;
-    color: #0056b3;
+        }
 
-}
+        /* Active effect for sidebar links */
+        .navbar-nav .nav-link.active {
+            background-color: #0056b3;
+            color: #ffffff;
+            font-weight: bold;
 
-/* Active effect for sidebar links */
-.navbar-nav .nav-link.active {
-    background-color: #0056b3;
-    color: #ffffff;
-    font-weight: bold;
+        }
 
-}
+        .nav-logo {
+            object-fit: cover;
+            object-position: center;
+            height: 100px;
+        }
 
-.nav-logo {
-    object-fit: cover;
-    object-position: center;
-    height: 100px;
-}
+        .nav-logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-.nav-logo-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+        @media (max-width: 768px) {
+            .nav-logo {
+                height: 50px;
+            }
+        }
 
-@media (max-width: 768px) {
-    .nav-logo {
-        height: 50px;
-    }
-}
         /* custom */
     </style>
 </head>

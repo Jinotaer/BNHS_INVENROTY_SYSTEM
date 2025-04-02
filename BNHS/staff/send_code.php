@@ -10,17 +10,17 @@ require 'assets\vendor\autoload.php'; // Adjusted path to vendor/autoload.php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-if (isset($_POST['add'])) {
-  if (empty($_POST['admin_email'])) {
+if (isset($_POST['send_code'])) {
+  if (empty($_POST['staff_email'])) {
     $err = "Email is required";
   } else {
-    $admin_email = $_POST['admin_email'];
+    $staff_email = $_POST['staff_email'];
 
     // Check if the email exists in the database
-    $checkQuery = "SELECT COUNT(*) FROM bnhs_admin WHERE admin_email = ?";
+    $checkQuery = "SELECT COUNT(*) FROM bnhs_staff WHERE staff_email = ?";
     $checkStmt = $mysqli->prepare($checkQuery);
     if ($checkStmt) {
-      $checkStmt->bind_param('s', $admin_email);
+      $checkStmt->bind_param('s', $staff_email);
       $checkStmt->execute();
       $checkStmt->bind_result($emailCount);
       $checkStmt->fetch();
@@ -36,7 +36,7 @@ if (isset($_POST['add'])) {
         $codeQuery = "INSERT INTO verification_codes (email, code) VALUES (?, ?)";
         $codeStmt = $mysqli->prepare($codeQuery);
         if ($codeStmt) {
-          $codeStmt->bind_param('ss', $admin_email, $verification_code);
+          $codeStmt->bind_param('ss', $staff_email, $verification_code);
           $codeStmt->execute();
         } else {
           $err = "Error: " . $mysqli->error;
@@ -56,7 +56,7 @@ if (isset($_POST['add'])) {
 
           // Recipients
           $mail->setFrom('no-reply@bnhs.com', 'BNHS Inventory System');
-          $mail->addAddress($admin_email);
+          $mail->addAddress($staff_email);
 
           // Content
           $mail->isHTML(true);
@@ -65,12 +65,12 @@ if (isset($_POST['add'])) {
 
           
           $mail->send();
-          $success = "Verification code sent successfully to $admin_email";
+          $success = "Verification code sent successfully to $staff_email";
           
           header("Location: verify_code.php");
           exit;
           // If successful, store email in session and redirect
-          // $_SESSION['verify_email'] = $admin_email;
+          // $_SESSION['verify_email'] = $staff_email;
           // if (isset($_SESSION['verify_email'])) {
           //   header("Location: verify_code.php");
           //   exit;
@@ -95,12 +95,12 @@ require_once('partials/_inhead.php');
 
       <div class="field">
         <div class="input-fields">
-          <input type="email" placeholder="Email" name="admin_email" required>
+          <input type="email" placeholder="Email" name="staff_email" required>
         </div>
       </div>
 
       <div class="input-field buttons">
-        <button type="submit" name="add" style="background-color: #29126d">SEND CODE</button>
+        <button type="submit" name="send_code" style="background-color: #29126d">SEND CODE</button>
       </div>
 
     </form>

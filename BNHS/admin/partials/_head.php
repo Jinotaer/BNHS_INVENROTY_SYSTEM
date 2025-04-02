@@ -59,6 +59,29 @@
         </script>
 
     <?php } ?>
+     <!-- logout alert -->
+     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const logoutBtn = document.getElementById('logoutBtn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', function (e) {
+                    e.preventDefault(); // Prevent the default link behavior
+                    swal({
+                        title: "Are you sure?",
+                        text: "Do you wish to logout?",
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true,
+                    }).then((willLogout) => {
+                        if (willLogout) {
+                            // Redirect to the logout page
+                            window.location.href = logoutBtn.getAttribute('href');
+                        }
+                    });
+                });
+            }
+        });
+    </script>
     <script>
         function getCustomer(val) {
             $.ajax({

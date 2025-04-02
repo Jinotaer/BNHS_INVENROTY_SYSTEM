@@ -1,11 +1,11 @@
 <?php
-$admin_id = $_SESSION['admin_id'];
+$staff_id = $_SESSION['staff_id'];
 //$login_id = $_SESSION['login_id'];
-$ret = "SELECT * FROM   bnhs_admin  WHERE admin_id = '$admin_id'";
+$ret = "SELECT * FROM   bnhs_staff  WHERE staff_id = '$staff_id'";
 $stmt = $mysqli->prepare($ret);
 $stmt->execute();
 $res = $stmt->get_result();
-while ($admin = $res->fetch_object()) {
+while ($staff = $res->fetch_object()) {
 
   ?>
   <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
@@ -85,38 +85,54 @@ while ($admin = $res->fetch_object()) {
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link dropdown-toggle" href="#inventorySubmenu" data-toggle="collapse" aria-expanded="false">
+            <a class="nav-link" href="inventory_management.php">
               <i><span class="material-icons-sharp text-primary">inventory_2</span></i> Inventory Management
             </a>
-            <ul class="collapse list-unstyled ml-3" id="inventorySubmenu">
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="track_inventory.php">
+              <i><span class="material-icons-sharp text-primary">fact_check</span></i> Track Inventory
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link dropdown-toggle" href="#reportsSubmenu" data-toggle="collapse" aria-expanded="false">
+              <i><span class="material-icons-sharp text-primary">description</span></i> Reports
+            </a>
+            <ul class="collapse list-unstyled ml-3" id="reportsSubmenu">
               <li class="nav-item">
-                <a class="nav-link" href="rpcppe.php">
-                  <i><span class="material-icons-sharp text-secondary">list</span></i> RPCPPE
+                <a class="nav-link" href="ris.php" style="padding: 8px 24px;">
+                  <i><span class="material-icons-sharp text-secondary">list</span></i> RIS
                 </a>
               </li>
-
+              <li class="nav-item" >
+                <a class="nav-link" href="ics.php" style="padding: 8px 24px;">
+                  <i><span class="material-icons-sharp text-secondary">add</span></i> ICS
+                </a>
+              </li>
               <li class="nav-item">
-                <a class="nav-link" href="rpcsp.php">
-                  <i><span class="material-icons-sharp text-secondary">add</span></i> RPCSP
+                <a class="nav-link" href="par.php" style="padding: 8px 24px;">
+                  <i><span class="material-icons-sharp text-secondary">add</span></i> PAR
                 </a>
               </li>
             </ul>
           </li>
-
           <li class="nav-item">
-            <a class="nav-link" href="customes.php">
-              <i><span class="material-icons-sharp text-primary">fact_check</span></i> Item Requests
+            <a class="nav-link dropdown-toggle" href="#AuditsSubmenu" data-toggle="collapse" aria-expanded="false">
+              <i><span class="material-icons-sharp text-primary">description</span></i> Audits
             </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="products.php">
-              <i><span class="material-icons-sharp text-primary">description</span></i>Reports & Audits
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="user_management.php">
-              <i><span class="material-icons-sharp text-primary">group</span></i> User Management
-            </a>
+            <ul class="collapse list-unstyled ml-3" id="AuditsSubmenu" >
+              <li class="nav-item">
+                <a class="nav-link" href="rpcppe.php" style="padding: 8px 24px;">
+                  <i><span class="material-icons-sharp text-secondary">list</span></i> RPCPPE
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="rpcsp.php" style="padding: 8px 24px;">
+                  <i><span class="material-icons-sharp text-secondary">add</span></i> RPCSP
+                </a>
+              </li>
+            </ul>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="change_profile.php">
@@ -128,7 +144,7 @@ while ($admin = $res->fetch_object()) {
           <hr class="my-3">
           <ul class="navbar-nav mb-md-3">
             <li class="nav-item">
-              <a class="nav-link" href="logout.php">
+              <a class="nav-link" href="logout.php" id="logoutBtn">
                 <i><span class="material-icons-sharp text-primary">logout</span></i> Log Out
               </a>
             </li>

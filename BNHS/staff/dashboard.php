@@ -1,8 +1,8 @@
 <?php
 session_start();
 include('config/config.php');
-// include('config/checklogin.php');
-// check_login();
+include('config/checklogin.php');
+check_login();
 require_once('partials/_head.php');
 // require_once('partials/_analytics.php');
 ?>

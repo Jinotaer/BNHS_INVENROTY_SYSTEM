@@ -128,7 +128,7 @@ while ($admin = $res->fetch_object()) {
           <hr class="my-3">
           <ul class="navbar-nav mb-md-3">
             <li class="nav-item">
-              <a class="nav-link" href="logout.php">
+              <a class="nav-link" href="logout.php" id="logoutBtn">
                 <i><span class="material-icons-sharp text-primary">logout</span></i> Log Out
               </a>
             </li>
