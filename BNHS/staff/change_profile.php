@@ -8,7 +8,7 @@ if (isset($_POST['ChangeProfile'])) {
   $staff_id = $_SESSION['staff_id'];
   $staff_name = $_POST['staff_name'];
   $staff_email = $_POST['staff_email'];
-  $Qry = "UPDATE rpos_staff SET staff_name =?, staff_email =? WHERE staff_id =?";
+  $Qry = "UPDATE bnhs_staff SET staff_name =?, staff_email =? WHERE staff_id =?";
   $postStmt = $mysqli->prepare($Qry);
   //bind paramaters
   $rc = $postStmt->bind_param('sss', $staff_name, $staff_email, $staff_id);
@@ -45,7 +45,8 @@ if (isset($_POST['changePassword'])) {
 
   if (!$error) {
     $staff_id = $_SESSION['staff_id'];
-    $sql = "SELECT * FROM rpos_staff   WHERE staff_id = '$staff_id'";
+    // Correct the table name to 'bnhs_staff' for password verification
+    $sql = "SELECT * FROM bnhs_staff WHERE staff_id = '$staff_id'";
     $res = mysqli_query($mysqli, $sql);
     if (mysqli_num_rows($res) > 0) {
       $row = mysqli_fetch_assoc($res);
@@ -54,16 +55,15 @@ if (isset($_POST['changePassword'])) {
       } elseif ($new_password != $confirm_password) {
         $err = "Confirmation Password Does Not Match";
       } else {
-
         $new_password = sha1(md5($_POST['new_password']));
-        //Insert Captured information to a database table
-        $query = "UPDATE rpos_staff SET  staff_password =? WHERE staff_id =?";
+        // Update the password in the 'bnhs_staff' table
+        $query = "UPDATE bnhs_staff SET staff_password =? WHERE staff_id =?";
         $stmt = $mysqli->prepare($query);
         //bind paramaters
         $rc = $stmt->bind_param('ss', $new_password, $staff_id);
         $stmt->execute();
 
-        //declare a varible which will be passed to alert function
+        //declare a variable which will be passed to alert function
         if ($stmt) {
           $success = "Password Changed" && header("refresh:1; url=dashboard.php");
         } else {
@@ -199,6 +199,7 @@ require_once('partials/_head.php');
                               <div class="row">
                                 <div class="col-lg-12">
                                   <div class="form-group">
+                                    <!-- Form field for entering the old password -->
                                     <label class="form-control-label" for="input-username">Old Password</label>
                                     <input type="password" name="old_password" id="input-username"
                                       class="form-control form-control-alternative">
@@ -207,6 +208,7 @@ require_once('partials/_head.php');
 
                                 <div class="col-lg-12">
                                   <div class="form-group">
+                                    <!-- Form field for entering the new password -->
                                     <label class="form-control-label" for="input-email">New Password</label>
                                     <input type="password" name="new_password"
                                       class="form-control form-control-alternative">
@@ -215,6 +217,7 @@ require_once('partials/_head.php');
 
                                 <div class="col-lg-12">
                                   <div class="form-group">
+                                    <!-- Form field for confirming the new password -->
                                     <label class="form-control-label" for="input-email">Confirm New Password</label>
                                     <input type="password" name="confirm_password"
                                       class="form-control form-control-alternative">
@@ -223,6 +226,7 @@ require_once('partials/_head.php');
 
                                 <div class="col-lg-12">
                                   <div class="form-group">
+                                    <!-- Submit button for changing the password -->
                                     <input type="submit" id="input-email" name="changePassword"
                                       class="btn btn-success form-control-alternative" value="Change Password">
                                   </div>
