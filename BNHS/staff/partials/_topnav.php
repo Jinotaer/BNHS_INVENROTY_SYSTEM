@@ -25,7 +25,7 @@ while ($staff = $res->fetch_object()) {
                                 <img alt="Image placeholder" src="assets/img/theme/user-a-min.png">
                             </span>
                             <div class="media-body ml-2 d-none d-lg-block">
-                                <span class="mb-0 text-sm  font-weight-bold"><?php echo $staff->staff_name; ?></span>
+                                <span class="mb-0 text-sm  font-weight-bold "><?php echo $staff->staff_name; ?></span>
                             </div>
                         </div>
                     </a>
@@ -47,7 +47,7 @@ while ($staff = $res->fetch_object()) {
             </ul>
         </div>
     </nav>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <?php } ?>

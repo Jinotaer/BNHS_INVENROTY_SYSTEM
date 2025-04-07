@@ -33,7 +33,7 @@ if (isset($_POST['send_code'])) {
         $verification_code = rand(100000, 999999);
 
         // Store the code in the database (optional, if needed for verification later)
-        $codeQuery = "INSERT INTO verification_codes (email, code) VALUES (?, ?)";
+        $codeQuery = "INSERT INTO verification_codes (email, code, created_at) VALUES (?, ?, NOW())";
         $codeStmt = $mysqli->prepare($codeQuery);
         if ($codeStmt) {
           $codeStmt->bind_param('ss', $staff_email, $verification_code);
@@ -63,19 +63,13 @@ if (isset($_POST['send_code'])) {
           $mail->Subject = 'Your Verification Code';
           $mail->Body = "Your verification code is: <b>$verification_code</b>";
 
-          
           $mail->send();
+          $_SESSION['verify_email'] = $staff_email; // Store for verify_code and password change
           $success = "Verification code sent successfully to $staff_email";
           
           header("Location: verify_code.php");
           exit;
-          // If successful, store email in session and redirect
-          // $_SESSION['verify_email'] = $staff_email;
-          // if (isset($_SESSION['verify_email'])) {
-          //   header("Location: verify_code.php");
-          //   exit;
-          // }
-        
+          
         } catch (Exception $e) {
           $err = "Failed to send the verification code. Mailer Error: {$mail->ErrorInfo}";
         }

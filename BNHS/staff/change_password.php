@@ -2,30 +2,35 @@
 session_start();
 include('config/config.php'); // Ensure this file contains a valid $mysqli connection
 
-if (isset($_POST['change_password'])) {
-    // Validate input
-    if (empty($_POST['admin_id']) || empty($_POST['new_password'])) {
+if (isset($_POST['change_password']) && isset($_SESSION['verified_email'])) {
+    if (empty($_POST['new_password']) || empty($_POST['confirm_password'])) {
         $err = "All fields are required.";
-    } elseif (strlen($_POST['new_password']) < 8) { // Validate password length
+    } elseif (strlen($_POST['new_password']) < 8) {
         $err = "Password must be at least 8 characters long.";
+    } elseif ($_POST['new_password'] !== $_POST['confirm_password']) {
+        $err = "Passwords do not match.";
     } else {
-        $admin_id = $_POST['admin_id'];
-        $new_password = sha1(md5($_POST['new_password'])); // Hash the new password
+        $email = $_SESSION['verified_email'];
+        $new_password = sha1(md5($_POST['new_password'])); // Hash the password
 
-        // Update the password in the database
-        $updateQuery = "UPDATE bnhs_admin SET admin_password = ? WHERE admin_id = ?";
+        $updateQuery = "UPDATE bnhs_staff SET staff_password = ? WHERE staff_email = ?";
         $updateStmt = $mysqli->prepare($updateQuery);
 
         if ($updateStmt) {
-            $updateStmt->bind_param('ss', $new_password, $admin_id);
+            $updateStmt->bind_param('ss', $new_password, $email);
 
             if ($updateStmt->execute()) {
+                // Password updated, remove verification session
+                unset($_SESSION['verified_email']);
                 $success = "Password updated successfully.";
+
+                // Optionally, redirect to login page or another page
+                header("Location: login.php");
             } else {
-                $err = "Error: " . $updateStmt->error; // Debugging: Show SQL error
+                $err = "Error: " . $updateStmt->error;
             }
         } else {
-            $err = "Error: " . $mysqli->error; // Debugging: Show SQL preparation error
+            $err = "Error: " . $mysqli->error;
         }
     }
 }
@@ -37,10 +42,6 @@ require_once('partials/_inhead.php');
   <div class="containers">
     <img src="assets/img/brand/bnhs.png" alt="This is a Logo" style="width: 150px; height: auto; margin-bottom: 40px">
     <form method="POST" rule="form">
-      <div>
-        <label for="admin_id">Admin ID:</label>
-        <input type="text" id="admin_id" name="admin_id" required>
-      </div>
       <div class="field create-password">
         <div class="input-field">
           <input class="username" type="password" placeholder="New Password" name="new_password" required />

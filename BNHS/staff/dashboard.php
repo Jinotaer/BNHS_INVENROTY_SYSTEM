@@ -219,12 +219,15 @@ require_once('partials/_head.php');
         </div>
       </div>
       <!-- Footer -->
-      <?php require_once('partials/_mainfooter.php'); ?>
+      <?php 
+       require_once('partials/_mainfooter.php');
+       ?>
     </div>
   </div>
+  
   <!-- Argon Scripts -->
   <?php
-  require_once('partials/_scripts.php');
+  // require_once('partials/_scripts.php');
   ?>;
 
 </body>
