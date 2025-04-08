@@ -330,3 +330,40 @@ if (isset($_POST['send_code'])) {
 }
 require_once('partials/_inhead.php');
 ?>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var dropdownElements = document.querySelectorAll('.dropdown-toggle');
+    dropdownElements.forEach(function (dropdown) {
+      new bootstrap.Dropdown(dropdown);
+    });
+  });
+</script>
+
+.buttons a {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+
+        .buttons a.admin {
+            background-color: #29126b; /* Blue */
+        }
+
+        .buttons a.cashier {
+            background-color: #29126d; /* Red */
+        }
+
+        .buttons a.customer {
+            background-color: #29126d; /* Green */
+        }
+
+        .buttons a:hover {
+            opacity: 0.5;
+        }

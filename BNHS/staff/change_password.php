@@ -20,12 +20,12 @@ if (isset($_POST['change_password']) && isset($_SESSION['verified_email'])) {
             $updateStmt->bind_param('ss', $new_password, $email);
 
             if ($updateStmt->execute()) {
+             
                 // Password updated, remove verification session
                 unset($_SESSION['verified_email']);
                 $success = "Password updated successfully.";
-
-                // Optionally, redirect to login page or another page
-                header("Location: login.php");
+                // Redirect to login page 
+                header("Location: index.php");
             } else {
                 $err = "Error: " . $updateStmt->error;
             }
@@ -34,7 +34,6 @@ if (isset($_POST['change_password']) && isset($_SESSION['verified_email'])) {
         }
     }
 }
-
 require_once('partials/_inhead.php');
 ?>
 

@@ -227,19 +227,10 @@ require_once('partials/_head.php');
   
   <!-- Argon Scripts -->
   <?php
-  // require_once('partials/_scripts.php');
-  ?>;
-
+  require_once('partials/_scripts.php');
+  ?>
 </body>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    var dropdownElements = document.querySelectorAll('.dropdown-toggle');
-    dropdownElements.forEach(function (dropdown) {
-      new bootstrap.Dropdown(dropdown);
-    });
-  });
 
-</script>
 <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->

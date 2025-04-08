@@ -92,7 +92,7 @@ while ($staff = $res->fetch_object()) {
 
           <li class="nav-item">
             <a class="nav-link" href="track_inventory.php">
-              <i><span class="material-icons-sharp text-primary">fact_check</span></i> Track Inventory
+              <i><span class="material-icons-sharp text-primary">plagiarism</span></i> Track Inventory
             </a>
           </li>
           <li class="nav-item">
@@ -100,36 +100,41 @@ while ($staff = $res->fetch_object()) {
               <i><span class="material-icons-sharp text-primary">description</span></i> Reports
             </a>
             <ul class="collapse list-unstyled ml-3" id="reportsSubmenu">
+            <li class="nav-item">
+                <a class="nav-link" href="display_iar.php" style="padding: 3px 24px;">
+                  <i><span class="material-icons-sharp text-primary">format_list_bulleted</span></i> IAR
+                </a>
+              </li>
               <li class="nav-item">
-                <a class="nav-link" href="ris.php" style="padding: 8px 24px;">
-                  <i><span class="material-icons-sharp text-secondary">list</span></i> RIS
+                <a class="nav-link" href="display_ris.php" style="padding: 3px 24px;">
+                  <i><span class="material-icons-sharp text-primary">format_list_bulleted</span></i> RIS
                 </a>
               </li>
               <li class="nav-item" >
-                <a class="nav-link" href="ics.php" style="padding: 8px 24px;">
-                  <i><span class="material-icons-sharp text-secondary">add</span></i> ICS
+                <a class="nav-link" href="display_ics.php" style="padding: 3px 24px;">
+                  <i><span class="material-icons-sharp text-primary">format_list_bulleted</span></i> ICS
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="par.php" style="padding: 8px 24px;">
-                  <i><span class="material-icons-sharp text-secondary">add</span></i> PAR
+                <a class="nav-link" href="display_par.php" style="padding: 3px 24px;">
+                  <i><span class="material-icons-sharp text-primary">format_list_bulleted</span></i> PAR
                 </a>
               </li>
             </ul>
           </li>
           <li class="nav-item">
             <a class="nav-link dropdown-toggle" href="#AuditsSubmenu" data-toggle="collapse" aria-expanded="false">
-              <i><span class="material-icons-sharp text-primary">description</span></i> Audits
+              <i><span class="material-icons-sharp text-primary">fact_check</span></i> Audits
             </a>
             <ul class="collapse list-unstyled ml-3" id="AuditsSubmenu" >
               <li class="nav-item">
-                <a class="nav-link" href="rpcppe.php" style="padding: 8px 24px;">
-                  <i><span class="material-icons-sharp text-secondary">list</span></i> RPCPPE
+                <a class="nav-link" href="rpcppe.php" style="padding: 3px 24px;">
+                  <i><span class="material-icons-sharp text-primary">format_list_bulleted</span></i> RPCPPE
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="rpcsp.php" style="padding: 8px 24px;">
-                  <i><span class="material-icons-sharp text-secondary">add</span></i> RPCSP
+                <a class="nav-link" href="rpcsp.php" style="padding: 3px 24px;">
+                  <i><span class="material-icons-sharp text-primary">format_list_bulleted</span></i> RPCSP
                 </a>
               </li>
             </ul>

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <!-- For more projects: Visit codeastro.com  -->
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,8 +16,8 @@
         /* #636b6f */
         html,
         body {
-            background-color: white;
-            color: #1e1e1e ;
+            background: linear-gradient(to bottom right, #d9f0ff, #ffffff);
+            color: #1e1e1e;
             font-family: 'Nunito', sans-serif;
             font-weight: 400;
             height: 100vh;
@@ -46,9 +47,11 @@
         .content {
             text-align: center;
         }
+
         .logo-img {
-          margin-bottom: 20px;
+            margin-bottom: 20px;
         }
+
         .title {
             font-family: 'verdana', sans-serif;
             font-size: 74px;
@@ -69,9 +72,10 @@
             margin-bottom: 30px;
         }
 
+
         .buttons a {
             display: inline-block;
-            padding: 10px 20px;
+            padding: 12px 24px;
             margin: 10px;
             font-size: 16px;
             font-weight: 600;
@@ -83,30 +87,36 @@
         }
 
         .buttons a.admin {
-            background-color: #29126b; /* Blue */
+            background-color: #29126b;
+            /* Blue */
         }
 
         .buttons a.cashier {
-            background-color: #29126d; /* Red */
+            background-color: #29126d;
+            /* Red */
         }
 
         .buttons a.customer {
-            background-color: #29126d; /* Green */
+            background-color: #29126d;
+            /* Green */
         }
 
         .buttons a:hover {
             opacity: 0.5;
         }
+
         .logo {
             margin: 0%;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
+
         .logo img {
-            width: 350px; 
+            width: 350px;
             height: auto;
         }
+
         .logo div {
             margin-top: 5px;
         }
@@ -116,26 +126,35 @@
             .title {
                 font-size: 48px;
             }
+
             .buttons a {
-                padding: 10px 16px;
+                padding: 12px 16px;
                 font-size: 14px;
                 display: grid;
+                margin: 20px;
             }
+
             .logo img {
-                width: 250px; /* Adjust the width for smaller screens */
+                width: 250px;
+                /* Adjust the width for smaller screens */
             }
         }
+
         @media (max-width: 480px) {
             .title {
                 font-size: 36px;
             }
+
             .buttons a {
                 display: grid;
-                padding: 8px 12px;
+                padding: 10px 12px;
                 font-size: 12px;
+                margin: 20px;
             }
+
             .logo img {
-                width: 200px; /* Adjust the width for smaller screens */
+                width: 200px;
+                /* Adjust the width for smaller screens */
             }
         }
     </style>

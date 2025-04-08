@@ -18,7 +18,11 @@
     <!-- design for login-->
      <link rel="stylesheet" href="assets/css/style.css">
 
-
+    <style>
+        body {
+            background: linear-gradient(to bottom right, #d9f0ff, #ffffff);
+        }
+    </style>
     <?php if (isset($success)) { ?>
         <!--This code for injecting success alert-->
         <script>

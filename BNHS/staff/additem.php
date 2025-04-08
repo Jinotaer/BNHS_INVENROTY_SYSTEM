@@ -6,7 +6,7 @@ include('config/config.php');
 //Delete Staff
 if (isset($_GET['delete'])) {
   $id = $_GET['delete'];
-  $adn = "DELETE FROM  bnhs_staff  WHERE  staff_id = ?";
+  $adn = "DELETE FROM bnhs_staff WHERE staff_id = ?";
   $stmt = $mysqli->prepare($adn);
   $stmt->bind_param('s', $id);
   $stmt->execute();
@@ -48,11 +48,10 @@ require_once('partials/_head.php');
         color: #0056b3;
         background-color: #f8f9fa;
       }
-
     </style>
     <!-- Header -->
     <div style="background-image: url(assets/img/theme/bnhsfront.jpg); background-size: cover;"
-      class="header  pb-8 pt-5 pt-md-8">
+      class="header pb-8 pt-5 pt-md-8">
       <span class="mask bg-gradient-dark opacity-8"></span>
       <div class="container-fluid">
         <div class="header-body">
@@ -64,196 +63,86 @@ require_once('partials/_head.php');
       <!-- Table -->
       <div class="row">
         <div class="col">
-
           <div class="card shadow">
-            <!-- Tabs -->
-            <ul class="nav nav-tabs custom-tabs" id="myTab" role="tablist">
-              <li class="nav-item">
-                <a class="nav-link active custom-tab-link" id="teachers-tab" data-toggle="tab" href="#teachers"
-                  role="tab" aria-controls="teachers" aria-selected="true">Teachers</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link custom-tab-link" id="staff-tab" data-toggle="tab" href="#staff" role="tab"
-                  aria-controls="staff" aria-selected="false">Staff</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link custom-tab-link" id="admins-tab" data-toggle="tab" href="#admins" role="tab"
-                  aria-controls="admins" aria-selected="false">Admins</a>
-              </li>
-            </ul>
-
-            <div class="tab-content" id="myTabContent">
-              <!-- Teachers Tab -->
-              <div class="tab-pane fade show active" id="teachers" role="tabpanel" aria-labelledby="teachers-tab">
-                <div class="card-header border-0">
-                  <div class="row align-items-center">
-                    <a href="add_teacher.php" class="btn btn-outline-success mx-3">
-                      <i class="fas fa-user-plus"></i>
-                      Add New Teacher
-                    </a>
-                    <div class="col text-right">
-                      <a href="orders_reports.php" class="btn btn-sm btn-primary">See all</a>
-                    </div>
-                  </div>
-
-                </div>
-
-                <div class="table-responsive">
-                  <table class="table align-items-center table-flush">
-                    <thead class="thead-light">
-                      <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Full Name</th>
-                        <th scope="col">Subject</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Actions</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <?php
-                      $ret = "SELECT * FROM bnhs_staff ORDER BY created_at DESC";
-                      $stmt = $mysqli->prepare($ret);
-                      $stmt->execute();
-                      $res = $stmt->get_result();
-                      while ($teacher = $res->fetch_object()) {
-                        ?>
-                        <tr>
-                          <td><?php echo $teacher->teacher_id; ?></td>
-                          <td><?php echo $teacher->teacher_name; ?></td>
-                          <td><?php echo $teacher->teacher_subject; ?></td>
-                          <td><?php echo $teacher->teacher_email; ?></td>
-                          <td>
-                            <a href="update_teacher.php?update=<?php echo $teacher->teacher_id; ?>">
-                              <button class="btn btn-sm btn-primary">
-                                <i class="fas fa-user-edit"></i> Update
-                              </button>
-                            </a>
-                            <a href="delete_teacher.php?delete=<?php echo $teacher->teacher_id; ?>">
-                              <button class="btn btn-sm btn-danger">
-                                <i class="fas fa-trash"></i> Delete
-                              </button>
-                            </a>
-                          </td>
-                        </tr>
-                      <?php } ?>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <!-- Staff Tab -->
-              <div class="tab-pane fade" id="staff" role="tabpanel" aria-labelledby="staff-tab">
-              <div class="card-header border-0">
-                  <div class="row align-items-center">
-                    <a href="add_teacher.php" class="btn btn-outline-success mx-3">
-                      <i class="fas fa-user-plus"></i>
-                      Add New Staff
-                    </a>
-                    <div class="col text-right">
-                      <a href="orders_reports.php" class="btn btn-sm btn-primary">See all</a>
-                    </div>
-                  </div>
-
-                </div>
-
-                <div class="table-responsive">
-                  <table class="table align-items-center table-flush">
-                    <thead class="thead-light">
-                      <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Full Name</th>
-                        <th scope="col">Contact Number</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Actions</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <?php
-                      $ret = "SELECT * FROM bnhs_staff ORDER BY created_at DESC";
-                      $stmt = $mysqli->prepare($ret);
-                      $stmt->execute();
-                      $res = $stmt->get_result();
-                      while ($staff = $res->fetch_object()) {
-                        ?>
-                        <tr>
-                          <td><?php echo $staff->staff_id; ?></td>
-                          <td><?php echo $staff->staff_name; ?></td>
-                          <td><?php echo $staff->staff_phoneno; ?></td>
-                          <td><?php echo $staff->staff_email; ?></td>
-                          <td>
-                            <a href="update_staff.php?update=<?php echo $staff->staff_id; ?>">
-                              <button class="btn btn-sm btn-primary">
-                                <i class="fas fa-user-edit"></i> Update
-                              </button>
-                            </a>
-                            <a href="delete_staff.php?delete=<?php echo $staff->staff_id; ?>">
-                              <button class="btn btn-sm btn-danger">
-                                <i class="fas fa-trash"></i> Delete
-                              </button>
-                            </a>
-                          </td>
-                        </tr>
-                      <?php } ?>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <!-- Admins Tab -->
-              <div class="tab-pane fade" id="admins" role="tabpanel" aria-labelledby="admins-tab">
-              <div class="card-header border-0">
-                  <div class="row align-items-center">
-                    <a href="add_teacher.php" class="btn btn-outline-success mx-3">
-                      <i class="fas fa-user-plus"></i>
-                      Add New Admin
-                    </a>
-                    <div class="col text-right">
-                      <a href="orders_reports.php" class="btn btn-sm btn-primary">See all</a>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="table-responsive">
-                  <table class="table align-items-center table-flush">
-                    <thead class="thead-light">
-                      <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Full Name</th>
-                        <th scope="col">Role</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Actions</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <?php
-                      $ret = "SELECT * FROM bnhs_admins ORDER BY created_at DESC";
-                      $stmt = $mysqli->prepare($ret);
-                      $stmt->execute();
-                      $res = $stmt->get_result();
-                      while ($admin = $res->fetch_object()) {
-                        ?>
-                        <tr>
-                          <td><?php echo $admin->admin_id; ?></td>
-                          <td><?php echo $admin->admin_name; ?></td>
-                          <td><?php echo $admin->admin_role; ?></td>
-                          <td><?php echo $admin->admin_email; ?></td>
-                          <td>
-                            <a href="update_admin.php?update=<?php echo $admin->admin_id; ?>">
-                              <button class="btn btn-sm btn-primary">
-                                <i class="fas fa-user-edit"></i> Update
-                              </button>
-                            </a>
-                            <a href="delete_admin.php?delete=<?php echo $admin->admin_id; ?>">
-                              <button class="btn btn-sm btn-danger">
-                                <i class="fas fa-trash"></i> Delete
-                              </button>
-                            </a>
-                          </td>
-                        </tr>
-                      <?php } ?>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
+            <div class="dropdown" style="padding: 20px; margin: 10px;">
+              <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false" style="width: 130px; height: 45px; border-color: none;">
+                ADD RIS
+              </button>
+              <ul class="dropdown-menu">
+                <li><button class="dropdown-item" type="button">ADD ICS</button></li>
+                <li><button class="dropdown-item" type="button">ADD PAR</button></li>
+              </ul>
             </div>
+
+            <div class="card-body ">
+              <form method="POST" action="save_building_info.php" class="border border-light p-4 rounded">
+                <div class="row mb-3">
+                  <div class="col-md-3">
+                    <div class="form-group " style="margin: 0px;">
+                    <label class="form-label">Article</label>
+                      <select class="form-select " name="article[]" required style="width: 100%; padding: 10px 12px; border-radius: 5px; border: 1px solid#cad1d7;">
+                        <option value="Building">Building</option>
+                        <option value="Furniture and Fixtures">Furniture and Fixtures</option>
+                        <option value="Machinery and Equipment">Machinery and Equipment</option>
+                        <option value="Transportation Equipment">Transportation Equipment</option>
+                        <option value="Office Supplies">Office Supplies</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-8">
+                    <label class="form-label">Description</label>
+                    <input type="text" class="form-control" name="description[]"
+                      value="Provincial School Board Building 1 (Junior High School Computer Laboratory)" required style="color: #000000;">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <div class="col-md-3">
+                    <label class="form-label">Property Number</label>
+                    <input type="text" class="form-control" name="property_number[]" value="CBNHS-10-B1" required style="color: #000000;">
+                  </div>
+                  <div class="col-md-3">
+                    <label class="form-label">Unit of Measure</label>
+                    <input type="text" class="form-control" name="unit_measure[]" value="1" required style="color: #000000;">
+                  </div>
+                  <div class="col-md-3">
+                    <label class="form-label">Unit Value</label>
+                    <input type="number" class="form-control" name="unit_value[]" value="180000" step="0.01" required style="color: #000000;">
+                  </div>
+                  <div class="col-md-3">
+                    <label class="form-label">Qty (Property Card)</label>
+                    <input type="number" class="form-control" name="qty_property_card[]" value="1" required style="color: #000000;">
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <div class="col-md-3">
+                    <label class="form-label">Qty (Physical Count)</label>
+                    <input type="number" class="form-control" name="qty_physical_count[]" value="1" required style="color: #000000;">
+                  </div>
+                  <div class="col-md-3">
+                    <label class="form-label">Shortage Qty</label>
+                    <input type="number" class="form-control" name="shortage_qty[]" value="0" style="color: #000000;">
+                  </div>
+                  <div class="col-md-3">
+                    <label class="form-label">Shortage Value</label>
+                    <input type="number" class="form-control" name="shortage_value[]" value="0" step="0.01" style="color: #000000;">
+                  </div>
+                  <!-- Remarks -->
+                  <div class="col-md-12">
+                    <label class="form-label">Remarks</label>
+                    <textarea class="form-control" name="remarks[]" rows="2"
+                      required>Operational and needs minor repair</textarea>
+                  </div>
+                </div>
+
+                <div class="text-end">
+                  <button type="submit" class="btn btn-primary px-4">Save</button>
+                </div>
+              </form>
+            </div>
+
           </div>
         </div>
       </div>

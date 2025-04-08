@@ -248,6 +248,9 @@ require_once('partials/_head.php');
   </div>
   <!-- Argon Scripts -->
   <?php
+  require_once('partials/_scripts.php');
+  ?>
+  <?php
   require_once('partials/_sidebar.php');
   ?>
 </body>
