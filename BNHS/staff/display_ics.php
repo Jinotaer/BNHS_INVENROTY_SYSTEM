@@ -32,8 +32,9 @@ require_once('partials/_head.php');
     require_once('partials/_topnav.php');
     ?>
     <!-- Header -->
-    <div style="background-image: url(assets/img/theme/bnhsfront.jpg); background-size: cover;" class="header  pb-8 pt-5 pt-md-8">
-    <span class="mask bg-gradient-dark opacity-8"></span>
+    <div style="background-image: url(assets/img/theme/bnhsfront.jpg); background-size: cover;"
+      class="header  pb-8 pt-5 pt-md-8">
+      <span class="mask bg-gradient-dark opacity-8"></span>
       <div class="container-fluid">
         <div class="header-body">
         </div>
@@ -45,19 +46,45 @@ require_once('partials/_head.php');
       <div class="row">
         <div class="col">
           <div class="card shadow">
-          <div class="card-header border-0">
-            <div class="col">
-                  <h3 class="mb-0">Inventory Custodian Slip</h3>
-                </div>
+            <div class="card-header border-0">
+              <div class="col">
+                <h2 class="text-center mb-3 pt-3 text-uppercase">Inventory Custodian Slip</h2>
+              </div>
+              <div class="col text-right">
+                <i></i>
+                <a href="orders_reports.php" class="btn btn-sm btn-primary">
+                  <i class="material-icons-sharp text-primary"></i>
+                  Print files</a>
+              </div>
             </div>
             <div class="table-responsive">
               <table class="table align-items-center table-flush">
                 <thead class="thead-light">
                   <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Full Name</th>
-                    <th scope="col">Contact Number</th>
-                    <th scope="col">Email</th>
+                    <th scope="col">Entity Name</th>
+                    <th scope="col">Fund Cluster</th>
+                    <th scope="col">ICS No.</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Unit</th>
+                    <th scope="col">Unit Cost</th>
+                    <th scope="col">Total Amount</th>
+                    <th scope="col">Item Description</th>
+                    <th scope="col">Inventory Item No.</th>
+                    <th scope="col">Estimated Useful Life</th>
+                    <th scope="col">User Name</th>
+                    <th scope="col">Position/Office</th>
+                    <th scope="col">Date Received(by User)</th>
+                    <th scope="col">Property Custodian</th>
+                    <th scope="col">Position/Office</th>
+                    <th scope="col">Date Received(by Custodian)</th>
+                    <th scope="col">Receiver Name</th>
+                    <th scope="col">Teacher's ID</th>
+                    <th scope="col">Position</th>
+                    <th scope="col">Date Inspected</th>
+                    <th scope="col">Inspection Team</th>
+                    <th scope="col">PTA Observer</th>
+                    <th scope="col">Date Received</th>
+                    <th scope="col">Property Custodian</th>
                     <th scope="col">Actions</th>
                   </tr>
                 </thead>
@@ -68,9 +95,25 @@ require_once('partials/_head.php');
                   $stmt->execute();
                   $res = $stmt->get_result();
                   while ($cust = $res->fetch_object()) {
-                  ?>
+                    ?>
                     <tr>
                       <td><?php echo $cust->staff_id; ?></td>
+                      <td><?php echo $cust->staff_name; ?></td>
+                      <td><?php echo $cust->staff_phoneno; ?></td>
+                      <td><?php echo $cust->staff_email; ?></td>
+                      <td><?php echo $cust->staff_id; ?></td>
+                      <td><?php echo $cust->staff_name; ?></td>
+                      <td><?php echo $cust->staff_phoneno; ?></td>
+                      <td><?php echo $cust->staff_email; ?></td><td><?php echo $cust->staff_id; ?></td>
+                      <td><?php echo $cust->staff_name; ?></td>
+                      <td><?php echo $cust->staff_phoneno; ?></td>
+                      <td><?php echo $cust->staff_email; ?></td><td><?php echo $cust->staff_id; ?></td>
+                      <td><?php echo $cust->staff_name; ?></td>
+                      <td><?php echo $cust->staff_phoneno; ?></td>
+                      <td><?php echo $cust->staff_email; ?></td><td><?php echo $cust->staff_id; ?></td>
+                      <td><?php echo $cust->staff_name; ?></td>
+                      <td><?php echo $cust->staff_phoneno; ?></td>
+                      <td><?php echo $cust->staff_email; ?></td><td><?php echo $cust->staff_id; ?></td>
                       <td><?php echo $cust->staff_name; ?></td>
                       <td><?php echo $cust->staff_phoneno; ?></td>
                       <td><?php echo $cust->staff_email; ?></td>
@@ -97,8 +140,8 @@ require_once('partials/_head.php');
           </div>
         </div>
       </div>
-       <!-- Footer -->
-       <?php
+      <!-- Footer -->
+      <?php
       require_once('partials/_mainfooter.php');
       ?>
     </div>

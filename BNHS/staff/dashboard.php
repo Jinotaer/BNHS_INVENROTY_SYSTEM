@@ -26,6 +26,13 @@ require_once('partials/_head.php');
       <div class="container-fluid">
         <div class="header-body">
           <!-- Card stats -->
+          <?php
+            $ret = "SELECT COUNT(*) AS total_accounts FROM (SELECT staff_id FROM bnhs_staff UNION ALL SELECT admin_id FROM bnhs_admin) AS combined_accounts";
+            $stmt = $mysqli->prepare($ret);
+            $stmt->execute();
+            $res = $stmt->get_result();
+            $user_count = $res->fetch_object()->total_accounts;
+            ?>  
           <div class="row">
             <div class="col-xl-3 col-lg-6">
               <div class="card card-stats mb-4 mb-xl-0">
@@ -33,7 +40,7 @@ require_once('partials/_head.php');
                   <div class="row">
                     <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">Teachers</h5>
-                      <!-- <span class="h2 font-weight-bold mb-0"><?php echo $customers; ?></span> -->
+                      <span class="h2 font-weight-bold mb-0"><?php echo $user_count; ?></span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
@@ -44,14 +51,20 @@ require_once('partials/_head.php');
                 </div>
               </div>
             </div>
-
+            <?php
+            $ret = "SELECT COUNT(*) AS total_accounts FROM (SELECT staff_id FROM bnhs_staff UNION ALL SELECT admin_id FROM bnhs_admin) AS combined_accounts";
+            $stmt = $mysqli->prepare($ret);
+            $stmt->execute();
+            $res = $stmt->get_result();
+            $user_count = $res->fetch_object()->total_accounts;
+            ?>
             <div class="col-xl-3 col-lg-6">
               <div class="card card-stats mb-4 mb-xl-0">
                 <div class="card-body">
                   <div class="row">
                     <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">Items</h5>
-                      <!-- <span class="h2 font-weight-bold mb-0"><?php echo $products; ?></span> -->
+                      <span class="h2 font-weight-bold mb-0"><?php echo $user_count; ?></span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-primary text-white rounded-circle shadow">
@@ -68,7 +81,7 @@ require_once('partials/_head.php');
                   <div class="row">
                     <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">Request</h5>
-                      <!-- <span class="h2 font-weight-bold mb-0"><?php echo $orders; ?></span> -->
+                      <span class="h2 font-weight-bold mb-0"><?php echo $user_count; ?></span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
@@ -115,7 +128,7 @@ require_once('partials/_head.php');
             <div class="card-header border-0">
               <div class="row align-items-center">
                 <div class="col">
-                  <h3 class="mb-0">Recent Orders</h3>
+                  <h3 class="mb-0">Items</h3>
                 </div>
                 <div class="col text-right">
                   <a href="orders_reports.php" class="btn btn-sm btn-primary">See all</a>
@@ -127,19 +140,37 @@ require_once('partials/_head.php');
               <table class="table align-items-center table-flush">
                 <thead class="thead-light">
                   <tr>
-                    <th class="text-success" scope="col"><b>Code</b></th>
+                    <!-- <th class="text-success" scope="col"><b>Code</b></th>
                     <th scope="col"><b>Customer</b></th>
                     <th class="text-success" scope="col"><b>Product</b></th>
                     <th scope="col"><b>Unit Price</b></th>
                     <th class="text-success" scope="col"><b>Qty</b></th>
                     <th scope="col"><b>Total</b></th>
                     <th scop="col"><b>Status</b></th>
-                    <th class="text-success" scope="col"><b>Date</b></th>
+                    <th class="text-success" scope="col"><b>Date</b></th> -->
+                    <th scope="col">Entity Name</th>
+                    <th scope="col">Fund Cluster</th>
+                    <th scope="col">PAR No.</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Unit</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Property Number</th>
+                    <th scope="col">Data Acquired</th>
+                    <th scope="col">Unit Cost</th>
+                    <th scope="col">Total Cost</th>
+                    <th scope="col">User Name</th>
+                    <th scope="col">Position/Office</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Property Custodian Name</th>
+                    <th scope="col">Position/Office</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php
-                  $ret = "SELECT * FROM  rpos_orders ORDER BY `rpos_orders`.`created_at` DESC LIMIT 7 ";
+                  $ret = "SELECT * FROM  bhs_staff ORDER BY `staff_id`.`created_at` DESC LIMIT 7 ";
                   $stmt = $mysqli->prepare($ret);
                   $stmt->execute();
                   $res = $stmt->get_result();
@@ -168,7 +199,7 @@ require_once('partials/_head.php');
           </div>
         </div>
       </div>
-      <!-- For more projects: Visit codeastro.com  -->
+     
       <div class="row mt-5">
         <div class="col-xl-12">
           <div class="card shadow">

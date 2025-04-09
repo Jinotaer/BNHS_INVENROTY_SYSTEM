@@ -48,17 +48,44 @@ require_once('partials/_head.php');
           <div class="card shadow">
             <div class="card-header border-0">
               <div class="col">
-                <h3 class="mb-0">Inspection and Acceptance Report</h3>
+                <h2 class="text-center mb-3 pt-3 text-uppercase">Inspection and Acceptance Report</h2>
+              </div>
+              <div class="col text-right">
+                <i></i>
+                <a target="_blank" href="print_files.php" class="btn btn-sm btn-primary">
+                  <i class="material-icons-sharp text-primary"></i>
+                  Print files</a>
               </div>
             </div>
+
             <div class="table-responsive">
               <table class="table align-items-center table-flush">
                 <thead class="thead-light">
                   <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Full Name</th>
-                    <th scope="col">Contact Number</th>
-                    <th scope="col">Email</th>
+                    <th scope="col">Entity Name</th>
+                    <th scope="col">Fund Cluster</th>
+                    <th scope="col">Supplier</th>
+                    <th scope="col">PO No. / Date</th>
+                    <th scope="col">Requisitioning Office/Dept.</th>
+                    <th scope="col">Responsibility Center</th>
+                    <th scope="col">IAR No.</th>
+                    <th scope="col">IAR Date</th>
+                    <th scope="col">Unit Cost</th>
+                    <th scope="col">Invoice No. / Date</th>
+                    <th scope="col">Stock / Property No.</th>
+                    <th scope="col">Remarks</th>
+                    <th scope="col">Unit</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Unit Price</th>
+                    <th scope="col">Total Price</th>
+                    <th scope="col">Receiver Name</th>
+                    <th scope="col">Teacher's ID</th>
+                    <th scope="col">Position</th>
+                    <th scope="col">Date Inspected</th>
+                    <th scope="col">Inspection Team</th>
+                    <th scope="col">PTA Observer</th>
+                    <th scope="col">Date Received</th>
+                    <th scope="col">Property Custodian</th>
                     <th scope="col">Actions</th>
                   </tr>
                 </thead>
@@ -71,6 +98,26 @@ require_once('partials/_head.php');
                   while ($cust = $res->fetch_object()) {
                     ?>
                     <tr>
+                      <td><?php echo $cust->staff_id; ?></td>
+                      <td><?php echo $cust->staff_name; ?></td>
+                      <td><?php echo $cust->staff_phoneno; ?></td>
+                      <td><?php echo $cust->staff_email; ?></td>
+                      <td><?php echo $cust->staff_id; ?></td>
+                      <td><?php echo $cust->staff_name; ?></td>
+                      <td><?php echo $cust->staff_phoneno; ?></td>
+                      <td><?php echo $cust->staff_email; ?></td>
+                      <td><?php echo $cust->staff_id; ?></td>
+                      <td><?php echo $cust->staff_name; ?></td>
+                      <td><?php echo $cust->staff_phoneno; ?></td>
+                      <td><?php echo $cust->staff_email; ?></td>
+                      <td><?php echo $cust->staff_id; ?></td>
+                      <td><?php echo $cust->staff_name; ?></td>
+                      <td><?php echo $cust->staff_phoneno; ?></td>
+                      <td><?php echo $cust->staff_email; ?></td>
+                      <td><?php echo $cust->staff_id; ?></td>
+                      <td><?php echo $cust->staff_name; ?></td>
+                      <td><?php echo $cust->staff_phoneno; ?></td>
+                      <td><?php echo $cust->staff_email; ?></td>
                       <td><?php echo $cust->staff_id; ?></td>
                       <td><?php echo $cust->staff_name; ?></td>
                       <td><?php echo $cust->staff_phoneno; ?></td>

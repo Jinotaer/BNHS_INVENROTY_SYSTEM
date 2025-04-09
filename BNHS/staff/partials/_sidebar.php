@@ -8,7 +8,7 @@ $res = $stmt->get_result();
 while ($staff = $res->fetch_object()) {
 
   ?>
-  <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
+  <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light" id="sidenav-main" style="background: linear-gradient(to bottom right, #d9f0ff, #ffffff);">
     <div class="container-fluid">
       <!-- Toggler -->
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenav-collapse-main"
@@ -17,7 +17,7 @@ while ($staff = $res->fetch_object()) {
       </button>
       <!-- Brand -->
       <a class="pt-1 nav-logo-container" href="dashboard.php">
-        <img src="assets/img/theme/logo.png" class="nav-logo" alt="...">
+        <img src="assets/img/theme/logos.png" class="nav-logo" alt="...">
       </a>
       <!-- User -->
       <ul class="nav align-items-center d-md-none">
@@ -60,7 +60,7 @@ while ($staff = $res->fetch_object()) {
           <div class="row">
             <div class="col-6 collapse-brand">
               <a href="dashboard.php">
-                <img src="assets/img/brand/bnhs.png "class="nav-logo-collapse" alt="...">
+                <img src="assets/img/brand/bnhs.png "class="nav-logo-collapse" alt="..." >
               </a>
             </div>
           </div>

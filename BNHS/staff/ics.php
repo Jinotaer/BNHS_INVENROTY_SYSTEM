@@ -100,67 +100,67 @@ require_once('partials/_head.php');
                   <div class="row mb-3">
                     <div class="col-md-2">
                       <label class="form-label">Quantity</label>
-                      <input  style="color: #000000; type="number" class="form-control" name="quantity" required>
+                      <input  style="color: #000000;" type="number" class="form-control" name="quantity" required>
                     </div>
                     <div class="col-md-2">
                       <label class="form-label">Unit</label>
-                      <input  style="color: #000000; type="text" class="form-control" name="unit" required>
+                      <input  style="color: #000000;" type="text" class="form-control" name="unit" required>
                     </div>
                     <div class="col-md-4">
                       <label class="form-label">Unit Cost</label>
-                      <input  style="color: #000000; type="text" class="form-control" name="unit_cost" required>
+                      <input  style="color: #000000;" type="text" class="form-control" name="unit_cost" required>
                     </div>
                     <div class="col-md-4">
                       <label class="form-label">Total Amount</label>
-                      <input  style="color: #000000; type="text" class="form-control" name="total_amount" required>
+                      <input  style="color: #000000;" type="text" class="form-control" name="total_amount" required>
                     </div>
                   </div>
 
                   <div class="row mb-3">
                     <div class="col-md-6">
                       <label class="form-label">Item Description</label>
-                      <input  style="color: #000000; type="text" class="form-control" name="item_description" required>
+                      <input  style="color: #000000;" type="text" class="form-control" name="item_description" required>
                     </div>
                     <div class="col-md-6">
                       <label class="form-label">Inventory Item No.</label>
-                      <input  style="color: #000000; type="text" class="form-control" name="inventory_item_no" required>
+                      <input  style="color: #000000;" type="text" class="form-control" name="inventory_item_no" required>
                     </div>
                   </div>
 
                   <div class="row mb-3">
                     <div class="col-md-4">
                       <label class="form-label">Estimated Useful Life</label>
-                      <input  style="color: #000000; type="text" class="form-control" name="estimated_life" required>
+                      <input  style="color: #000000;" type="text" class="form-control" name="estimated_life" required>
                     </div>
                     <div class="col-md-4">
                       <label class="form-label">End User Name</label>
-                      <input  style="color: #000000; type="text" class="form-control" name="end_user_name" required>
+                      <input  style="color: #000000;" type="text" class="form-control" name="end_user_name" required>
                     </div>
                     <div class="col-md-4">
                       <label class="form-label">Position / Office</label>
-                      <input  style="color: #000000; type="text" class="form-control" name="end_user_position" required>
+                      <input  style="color: #000000;" type="text" class="form-control" name="end_user_position" required>
                     </div>
                   </div>
 
                   <div class="row mb-3">
                     <div class="col-md-4">
                       <label class="form-label">Date Received (by End User)</label>
-                      <input  style="color: #000000; type="date" class="form-control" name="date_received_user" required>
+                      <input  style="color: #000000;" type="date" class="form-control" name="date_received_user" required>
                     </div>
                     <div class="col-md-4">
                       <label class="form-label">Property Custodian Name</label>
-                      <input  style="color: #000000; type="text" class="form-control" name="custodian_name" required>
+                      <input  style="color: #000000;" type="text" class="form-control" name="custodian_name" required>
                     </div>
                     <div class="col-md-4">
                       <label class="form-label">Position / Office (Custodian)</label>
-                      <input  style="color: #000000; type="text" class="form-control" name="custodian_position" required>
+                      <input  style="color: #000000;" type="text" class="form-control" name="custodian_position" required>
                     </div>
                   </div>
 
                   <div class="row mb-3">
                     <div class="col-md-4">
                       <label class="form-label">Date Received (by Custodian)</label>
-                      <input  style="color: #000000; type="date" class="form-control" name="date_received_custodian" required>
+                      <input  style="color: #000000;" type="date" class="form-control" name="date_received_custodian" required>
                     </div>
                   </div>
 

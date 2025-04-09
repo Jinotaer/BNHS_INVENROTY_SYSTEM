@@ -180,10 +180,14 @@ require_once('partials/_head.php');
                       <label class="form-label">Date Inspected</label>
                       <input style="color: #000000" type="date" class="form-control" name="date_inspected">
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-5">
                       <label class="form-label">Inspection Team (comma separated)</label>
                       <input style="color: #000000" type="text" class="form-control" name="inspectors"
                         placeholder="e.g., Joan Savage, Nelson British, Bles Sings">
+                    </div>
+                    <div class="col-md-3">
+                      <label class="form-label">Barangay Councilor</label>
+                      <input style="color: #000000" type="text" class="form-control" name="inspectors">
                     </div>
                   </div>
 

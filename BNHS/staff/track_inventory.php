@@ -64,14 +64,14 @@ require_once('partials/_head.php');
         <div class="col">
           <div class="card shadow">
             <div class="card-header border-0">
-              <form class="form-inline" method="GET" 
-                style="float: left; margin-top: 20px; margin-bottom: 20px;">
-                <input class="form-control mr-sm-2" style="width: 500px;" type="search" name="item"
-                  placeholder="Search Item by Name" aria-label="Search" value="<?php echo isset($_GET['item']) ? htmlspecialchars($_GET['item']) : ''; ?>">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+              <form class="form-inline" method="GET" style="float: left; margin-top: 20px; margin-bottom: 20px;">
+                <input id="search" class="form-control mr-sm-2" style="width: 500px;" type="search" name="item"
+                  placeholder="Search Item by Name" aria-label="Search"
+                  value="<?php echo isset($_GET['item']) ? htmlspecialchars($_GET['item']) : ''; ?>">
+                <!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
                   <i class="fas fa-search"></i>
                   Search
-                </button>
+                </button> -->
               </form>
             </div>
             <div class="table-responsive">
@@ -85,12 +85,12 @@ require_once('partials/_head.php');
                     <th scope="col">Actions</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody class="list" id="userTableBody">
                   <?php
                   if (!empty($searchResults)) {
                     // Display search results
                     foreach ($searchResults as $cust) {
-                  ?>
+                      ?>
                       <tr>
                         <td><?php echo $cust->staff_id; ?></td>
                         <td><?php echo $cust->staff_name; ?></td>
@@ -116,15 +116,8 @@ require_once('partials/_head.php');
                           </a>
                         </td>
                       </tr>
-                  <?php
+                      <?php
                     }
-                  } else if (isset($_GET['item'])) {
-                    // Fallback message for search results
-                  ?>
-                      <tr>
-                        <td colspan="5" class="text-center">No staff records found.</td>
-                      </tr>
-                  <?php
                   } else {
                     // Display all staff if no search query is provided
                     $ret = "SELECT * FROM bnhs_staff ORDER BY `bnhs_staff`.`created_at` DESC";
@@ -133,37 +126,41 @@ require_once('partials/_head.php');
                     $res = $stmt->get_result();
                     if ($res->num_rows > 0) {
                       while ($cust = $res->fetch_object()) {
-                  ?>
-                        <tr>
-                          <td><?php echo $cust->staff_id; ?></td>
-                          <td><?php echo $cust->staff_name; ?></td>
-                          <td><?php echo $cust->staff_phoneno; ?></td>
-                          <td><?php echo $cust->staff_email; ?></td>
-                          <td>
-                            <a href="view_item.php?id=<?php echo $cust->staff_id; ?>">
-                              <button class="btn btn-sm btn-info">
-                                <i class="fas fa-eye"></i> View
-                              </button>
-                            </a>
-                            <a href="user_management.php?delete=<?php echo $cust->staff_id; ?>">
-                              <button class="btn btn-sm btn-danger">
-                                <i class="fas fa-trash"></i>
-                                Delete
-                              </button>
-                            </a>
-                            <a href="update_staff.php?update=<?php echo $cust->staff_id; ?>">
-                              <button class="btn btn-sm btn-primary">
-                                <i class="fas fa-user-edit"></i>
-                                Update
-                              </button>
-                            </a>
-                          </td>
-                        </tr>
-                  <?php
+                        ?>
+                          <tr>
+                            <td><?php echo $cust->staff_id; ?></td>
+                            <td><?php echo $cust->staff_name; ?></td>
+                            <td><?php echo $cust->staff_phoneno; ?></td>
+                            <td><?php echo $cust->staff_email; ?></td>
+                            <td>
+                              <a href="view_item.php?id=<?php echo $cust->staff_id; ?>">
+                                <button class="btn btn-sm btn-info">
+                                  <i class="fas fa-eye"></i> View
+                                </button>
+                              </a>
+                              <a href="user_management.php?delete=<?php echo $cust->staff_id; ?>">
+                                <button class="btn btn-sm btn-danger">
+                                  <i class="fas fa-trash"></i>
+                                  Delete
+                                </button>
+                              </a>
+                              <a href="update_staff.php?update=<?php echo $cust->staff_id; ?>">
+                                <button class="btn btn-sm btn-primary">
+                                  <i class="fas fa-user-edit"></i>
+                                  Update
+                                </button>
+                              </a>
+                            </td>
+                          </tr>
+                        <?php
                       }
                     }
                   }
                   ?>
+                   <!-- No-results row always included for JS filtering -->
+                   <tr id="noResults" style="display: none;">
+                    <td colspan="5" class="text-center">No staff records found.</td>
+                  </tr>
                 </tbody>
               </table>
             </div>

@@ -1,163 +1,178 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <!-- For more projects: Visit codeastro.com  -->
+
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png" sizes="32x32" href="logo1.png">
-    <title>POS System</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" sizes="32x32" href="logo1.png">
+  <title>POS System</title>
 
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
-    <!-- Styles -->
-    <style>
-        html,
-        body {
-            background-color: #fff;
-            color: #636b6f;
-            font-family: 'Nunito', sans-serif;
-            font-weight: 200;
-            height: 100vh;
-            margin: 0;
-        }
+  <!-- Styles -->
+  <style>
+    html,
+    body {
+      background-color: #fff;
+      color: #636b6f;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 200;
+      height: 100vh;
+      margin: 0;
+    }
 
-        .full-height {
-            height: 100vh;
-        }
+    .full-height {
+      height: 100vh;
+    }
 
-        .flex-center {
-            align-items: center;
-            display: flex;
-            justify-content: center;
-        }
+    .flex-center {
+      align-items: center;
+      display: flex;
+      justify-content: center;
+    }
 
-        .position-ref {
-            position: relative;
-        }
+    .position-ref {
+      position: relative;
+    }
 
-        .top-right {
-            position: absolute;
-            right: 10px;
-            top: 18px;
-        }
+    .top-right {
+      position: absolute;
+      right: 10px;
+      top: 18px;
+    }
 
-        .content {
-            text-align: center;
-        }
+    .content {
+      text-align: center;
+    }
 
-        .title {
-            font-size: 84px;
-        }
+    .title {
+      font-size: 84px;
+    }
 
-        .links>a {
-            color: #636b6f;
-            padding: 0 25px;
-            font-size: 13px;
-            font-weight: 600;
-            letter-spacing: .1rem;
-            text-decoration: none;
-            text-transform: uppercase;
-        }
+    .links>a {
+      color: #636b6f;
+      padding: 0 25px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: .1rem;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
 
-        .m-b-md {
-            margin-bottom: 30px;
-        }
+    .m-b-md {
+      margin-bottom: 30px;
+    }
 
-        .buttons a {
-            display: inline-block;
-            padding: 10px 20px;
-            margin: 10px;
-            font-size: 16px;
-            font-weight: 600;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            text-decoration: none;
-            text-transform: uppercase;
-        }
-        /* #dc3545  #007bff #28a745*/
-        .buttons a.admin {
-            background-color: #6f562b; /* Blue */
-        }
+    .buttons a {
+      display: inline-block;
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
 
-        .buttons a.cashier {
-            background-color: #6f562b; /* Red */
-        }
+    /* #dc3545  #007bff #28a745*/
+    .buttons a.admin {
+      background-color: #6f562b;
+      /* Blue */
+    }
 
-        .buttons a.customer {
-            background-color: #6f562b; /* Green */
-        }
+    .buttons a.cashier {
+      background-color: #6f562b;
+      /* Red */
+    }
 
-        .buttons a:hover {
-            opacity: 0.8;
-        }
-        .logo {
-            margin: 0%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .logo img {
-            width: 350px; 
-            height: auto;
-        }
-        .logo div {
-            margin-top: 5px;
-        }
-    </style>
-    <style>
-        @media (max-width: 768px) {
-            .title {
-                font-size: 48px;
-            }
-            .buttons a {
-                padding: 10px 16px;
-                font-size: 14px;
-                display: grid;
-            }
-            .logo img {
-                width: 250px; /* Adjust the width for smaller screens */
-            }
-        }
-        @media (max-width: 480px) {
-            .title {
-                font-size: 36px;
-            }
-            .buttons a {
-                display: grid;
-                padding: 8px 12px;
-                font-size: 12px;
-            }
-            .logo img {
-                width: 200px; /* Adjust the width for smaller screens */
-            }
-        }
-    </style>
+    .buttons a.customer {
+      background-color: #6f562b;
+      /* Green */
+    }
+
+    .buttons a:hover {
+      opacity: 0.8;
+    }
+
+    .logo {
+      margin: 0%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .logo img {
+      width: 350px;
+      height: auto;
+    }
+
+    .logo div {
+      margin-top: 5px;
+    }
+  </style>
+  <style>
+    @media (max-width: 768px) {
+      .title {
+        font-size: 48px;
+      }
+
+      .buttons a {
+        padding: 10px 16px;
+        font-size: 14px;
+        display: grid;
+      }
+
+      .logo img {
+        width: 250px;
+        /* Adjust the width for smaller screens */
+      }
+    }
+
+    @media (max-width: 480px) {
+      .title {
+        font-size: 36px;
+      }
+
+      .buttons a {
+        display: grid;
+        padding: 8px 12px;
+        font-size: 12px;
+      }
+
+      .logo img {
+        width: 200px;
+        /* Adjust the width for smaller screens */
+      }
+    }
+  </style>
 </head>
 
 <body>
-    <div class="flex-center position-ref full-height">
-        <div class="content">
-            <div class="title m-b-md">
-                <div class="logo">
-                    <img src="logo.png" alt="POS Logo">
-                    <div>BNHS INVENTORY SYSTEM</div>
-                </div>
-            </div>
-
-            <div class="buttons">
-                <a href="Main/admin/" class="admin">Admin Log In</a>
-                <a href="Main/staff/" class="cashier">Cashier Log In</a>
-                <!-- <a href="Main/customer/" class="customer">Customer Log In</a> -->
-            </div>
+  <div class="flex-center position-ref full-height">
+    <div class="content">
+      <div class="title m-b-md">
+        <div class="logo">
+          <img src="logo.png" alt="POS Logo">
+          <div>BNHS INVENTORY SYSTEM</div>
         </div>
+      </div>
+
+      <div class="buttons">
+        <a href="Main/admin/" class="admin">Admin Log In</a>
+        <a href="Main/staff/" class="cashier">Cashier Log In</a>
+        <!-- <a href="Main/customer/" class="customer">Customer Log In</a> -->
+      </div>
     </div>
+  </div>
 </body>
 
 </html>
 
-  <!-- <a href="#" class="mode-toggler">
+<!-- <a href="#" class="mode-toggler">
           <div class="moon-sun">
             <i class="material-icons-sharp moon">dark_mode</i>
             <i class="material-icons-sharp sun">light_mode</i>
@@ -169,56 +184,56 @@
           </div>
         </a> -->
 
-        /* toggle icon */
-aside .sidebar .mode-toggler  i {
-  font-size: 1.6rem;
-  transition: all 300ms ease;
-  position: absolute;
+/* toggle icon */
+aside .sidebar .mode-toggler i {
+font-size: 1.6rem;
+transition: all 300ms ease;
+position: absolute;
 }
 aside .sidebar .mode-toggler .moon-sun{
-  height: 50px;
-  width: 60px;
-  display: flex;
-  align-items: center; 
+height: 50px;
+width: 60px;
+display: flex;
+align-items: center;
 }
 aside .sidebar .mode-toggler i.moon {
- opacity: 0;
-}  
+opacity: 0;
+}
 aside .sidebar .mode-toggler .toggle-switch{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  min-width: 60px;
+display: flex;
+align-items: center;
+justify-content: center;
+height: 100%;
+min-width: 60px;
 }
 .toggle-switch .switch{
-  position: relative;
-  height: 22px;
-  width: 44px;
-  border-radius: 25px;
-  background: var(--color-primary);
+position: relative;
+height: 22px;
+width: 44px;
+border-radius: 25px;
+background: var(--color-primary);
 }
 .switch::before{
-  content: '';
-  position: absolute;
-  height: 15px;
-  width: 15px;
-  border-radius: 50%;
-  top: 50%;
-  left: 5px;
-  transform: translateY(-50%);
-  background: var(--color-white);
-  cursor: pointer;
+content: '';
+position: absolute;
+height: 15px;
+width: 15px;
+border-radius: 50%;
+top: 50%;
+left: 5px;
+transform: translateY(-50%);
+background: var(--color-white);
+cursor: pointer;
 }
 /* END toggle icon */
 
 
 
 CREATE TABLE verification_codes (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    email VARCHAR(255) NOT NULL,
-    code VARCHAR(6) NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+id INT AUTO_INCREMENT PRIMARY KEY,
+email VARCHAR(255) NOT NULL,
+code VARCHAR(6) NOT NULL,
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 Ensure Composer is Installed
@@ -308,17 +323,17 @@ if (isset($_POST['send_code'])) {
           $mail->send();
           $_SESSION['verify_email'] = $staff_email; // Store for verify_code and password change
           $success = "Verification code sent successfully to $staff_email";
-          
+
           header("Location: verify_code.php");
           exit;
-          
+
           // If successful, store email in session and redirect
           // $_SESSION['verify_email'] = $staff_email;
           // if (isset($_SESSION['verify_email'])) {
           //   header("Location: verify_code.php");
           //   exit;
           // }
-        
+
         } catch (Exception $e) {
           $err = "Failed to send the verification code. Mailer Error: {$mail->ErrorInfo}";
         }
@@ -340,30 +355,251 @@ require_once('partials/_inhead.php');
 </script>
 
 .buttons a {
-            display: inline-block;
-            padding: 10px 20px;
-            margin: 10px;
-            font-size: 16px;
-            font-weight: 600;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            text-decoration: none;
-            text-transform: uppercase;
-        }
+display: inline-block;
+padding: 10px 20px;
+margin: 10px;
+font-size: 16px;
+font-weight: 600;
+color: #fff;
+border: none;
+border-radius: 5px;
+text-decoration: none;
+text-transform: uppercase;
+}
 
-        .buttons a.admin {
-            background-color: #29126b; /* Blue */
-        }
+.buttons a.admin {
+background-color: #29126b; /* Blue */
+}
 
-        .buttons a.cashier {
-            background-color: #29126d; /* Red */
-        }
+.buttons a.cashier {
+background-color: #29126d; /* Red */
+}
 
-        .buttons a.customer {
-            background-color: #29126d; /* Green */
-        }
+.buttons a.customer {
+background-color: #29126d; /* Green */
+}
 
-        .buttons a:hover {
-            opacity: 0.5;
-        }
+.buttons a:hover {
+opacity: 0.5;
+}
+
+
+body>
+<div class="container">
+  <div class="row">
+    <div id="Receipt" class="well col-xs-10 col-sm-10 col-md-6 col-xs-offset-1 col-sm-offset-1 col-md-offset-3">
+      <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <address>
+            <strong>CodeAstro Lounge</strong>
+            <br>
+            127-0-0-1
+            <br>
+            4151 Willow Oaks Lane, Sugartown
+            <br>
+            (+000) 337-337-3069
+          </address>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6 text-right">
+          <p>
+            <em>Date: <?php echo date('d/M/Y g:i', strtotime($order->created_at)); ?></em>
+          </p>
+          <p>
+            <em class="text-success">Receipt #: <?php echo $order->order_code; ?></em>
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="text-center">
+          <h2>Receipt</h2>
+        </div>
+        </span>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Quantity</th>
+              <th class="text-center">Unit Price</th>
+              <th class="text-center">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="col-md-9"><em> <?php echo $order->prod_name; ?> </em></h4>
+              </td>
+              <td class="col-md-1" style="text-align: center"> <?php echo $order->prod_qty; ?></td>
+              <td class="col-md-1 text-center">$<?php echo $order->prod_price; ?></td>
+              <td class="col-md-1 text-center">$<?php echo $total; ?></td>
+            </tr>
+            <tr>
+              <td>   </td>
+              <td>   </td>
+              <td class="text-right">
+                <p>
+                  <strong>Subtotal: </strong>
+                </p>
+                <p>
+                  <strong>Tax: </strong>
+                </p>
+              </td>
+              <td class="text-center">
+                <p>
+                  <strong>$<?php echo $total; ?></strong>
+                </p>
+                <p>
+                  <strong>14%</strong>
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>   </td>
+              <td>   </td>
+              <td class="text-right">
+                <h4><strong>Total: </strong></h4>
+              </td>
+              <td class="text-center text-danger">
+                <h4><strong>$<?php echo $total; ?></strong></h4>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="well col-xs-10 col-sm-10 col-md-6 col-xs-offset-1 col-sm-offset-1 col-md-offset-3">
+      <button id="print" onclick="printContent('Receipt');" class="btn btn-success btn-lg text-justify btn-block">
+        Print <span class="fas fa-print"></span>
+      </button>
+    </div>
+  </div>
+</div>
+</body>
+
+
+<?php
+session_start();
+include('config/config.php');
+include('config/checklogin.php');
+check_login();
+?>
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Bukidnon National High School Inventory System</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/img/brand/bnhs.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/brand/bnhs.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/img/brand/bnhs.png">
+  <meta name="theme-color" content="#ffffff">
+  <link href="assets/css/bootstrap.css" rel="stylesheet">
+  <script src="assets/js/jquery.js"></script>
+ <!-- Bootstrap 5 CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap 5 JavaScript Bundle (includes Popper) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <style>
+    body {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container mt-5" id="printableArea">
+    <div id="list" class="col-10 offset-1 col-md-8 offset-md-2">
+      <div class="row">
+
+
+        <div class="text-center mb-4">
+          <h5>REPORT ON THE PHYSICAL COUNT OF PROPERTY, PLANT AND EQUIPMENT</h5>
+          <h6>IT EQUIPMENT</h6>
+          <p>As of <?php echo strtoupper(date('F Y')); ?></p>
+        </div>
+
+        <p><strong>Fund Cluster:</strong><strong>__________________________</strong></p>
+        <p>
+          <strong>For which:</strong> CodeAstro Lounge &nbsp;&nbsp;
+          <strong>Administrative Officer:</strong> John Doe &nbsp;&nbsp;
+          <strong>As of:</strong> <?php echo date('F d, Y'); ?>
+        </p>
+
+        <table class="table table-bordered text-center">
+          <thead class="thead-light">
+            <tr>
+              <th>ARTICLE</th>
+              <th>DESCRIPTION</th>
+              <th>PROPERTY NO.</th>
+              <th>UNIT OF MEASURE</th>
+              <th>UNIT VALUE</th>
+              <th>QTY PER CARD</th>
+              <th>QTY PER COUNT</th>
+              <th>SHORTAGE/ OVERAGE</th>
+              <th>REMARKS</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php
+            $ret = "SELECT * FROM bnhs_staff";
+            $stmt = $mysqli->prepare($ret);
+            $stmt->execute();
+            $res = $stmt->get_result();
+
+            while ($staff = $res->fetch_object()) {
+              ?>
+              <tr>
+                <td>IT EQUIPMENT</td>
+                <td>sad</td>
+                <td>sadad ?></td>
+                <td>pcs</td>
+                <td>sadasd ?></td>
+                <td>sadas; ?></td>
+                <td>asdasd?></td>
+                <td>0</td>
+                <td>Good Condition</td>
+              </tr>
+            <?php } ?>
+          </tbody>
+        </table>
+
+        <br><br>
+        <div class="row text-center mt-5">
+          <div class="col-md-4">
+            <p>Certified Correct:</p><br><br>
+            <strong>__________________________</strong><br>
+            <em>Inventory Committee Chair</em>
+          </div>
+          <div class="col-md-4">
+            <p>Approved by:</p><br><br>
+            <strong>__________________________</strong><br>
+            <em>School Head / Admin Officer</em>
+          </div>
+          <div class="col-md-4">
+            <p>Verified by:</p><br><br>
+            <strong>__________________________</strong><br>
+            <em>COA Representative</em>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Print Button -->
+  <div class="col-xs-2 col-sm-2 col-md-1 col-xs-offset-1 col-sm-offset-1 col-md-offset-8 " style="margin-top: 40px;">
+    <button id="print" onclick="printContent('list');" class="btn btn-primary btn-lg text-justify btn-block">
+      Print <span class="fas fa-print"></span>
+    </button>
+  </div>
+
+</body>
+<script>
+  function printContent(el) {
+    var restorepage = $('body').html();
+    var printcontent = $('#' + el).clone();
+    $('body').empty().html(printcontent);
+    window.print();
+    $('body').html(restorepage);
+  }
+</script>
+
+</html>

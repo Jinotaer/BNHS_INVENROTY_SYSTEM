@@ -48,17 +48,35 @@ require_once('partials/_head.php');
           <div class="card shadow">
             <div class="card-header border-0">
               <div class="col">
-                <h3 class="mb-0">Purchase Acceptance Report</h3>
+                <h2 class="text-center mb-3 pt-3 text-uppercase">Purchase Acceptance Report</h2>
+              </div>
+              <div class="col text-right">
+                <a href="orders_reports.php" class="btn btn-sm btn-primary">
+                  <i class="material-icons-sharp text-primary"></i>
+                  Print files</a>
               </div>
             </div>
             <div class="table-responsive">
               <table class="table align-items-center table-flush">
                 <thead class="thead-light">
                   <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Full Name</th>
-                    <th scope="col">Contact Number</th>
-                    <th scope="col">Email</th>
+                    <th scope="col">Entity Name</th>
+                    <th scope="col">Fund Cluster</th>
+                    <th scope="col">PAR No.</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Unit</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Property Number</th>
+                    <th scope="col">Data Acquired</th>
+                    <th scope="col">Unit Cost</th>
+                    <th scope="col">Total Cost</th>
+                    <th scope="col">User Name</th>
+                    <th scope="col">Position/Office</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Property Custodian Name</th>
+                    <th scope="col">Position/Office</th>
+                    <th scope="col">Date</th>
                     <th scope="col">Actions</th>
                   </tr>
                 </thead>
@@ -75,6 +93,19 @@ require_once('partials/_head.php');
                       <td><?php echo $cust->staff_name; ?></td>
                       <td><?php echo $cust->staff_phoneno; ?></td>
                       <td><?php echo $cust->staff_email; ?></td>
+                      <td><?php echo $cust->staff_id; ?></td>
+                      <td><?php echo $cust->staff_name; ?></td>
+                      <td><?php echo $cust->staff_phoneno; ?></td>
+                      <td><?php echo $cust->staff_email; ?></td>
+                      <td><?php echo $cust->staff_id; ?></td>
+                      <td><?php echo $cust->staff_name; ?></td>
+                      <td><?php echo $cust->staff_phoneno; ?></td>
+                      <td><?php echo $cust->staff_email; ?></td>
+                      <td><?php echo $cust->staff_id; ?></td>
+                      <td><?php echo $cust->staff_name; ?></td>
+                      <td><?php echo $cust->staff_phoneno; ?></td>
+                      <td><?php echo $cust->staff_email; ?></td>
+                      <td><?php echo $cust->staff_id; ?></td>
                       <td>
                         <a href="user_management.php?delete=<?php echo $cust->staff_id; ?>">
                           <button class="btn btn-sm btn-danger">
