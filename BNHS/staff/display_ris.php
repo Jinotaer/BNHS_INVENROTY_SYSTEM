@@ -6,13 +6,13 @@ include('config/config.php');
 //Delete Staff
 if (isset($_GET['delete'])) {
   $id = $_GET['delete'];
-  $adn = "DELETE FROM  bnhs_staff  WHERE  staff_id = ?";
+  $adn = "DELETE FROM  requisition_and_issue_slip  WHERE  id = ?";
   $stmt = $mysqli->prepare($adn);
   $stmt->bind_param('s', $id);
   $stmt->execute();
   $stmt->close();
   if ($stmt) {
-    $success = "Deleted" && header("refresh:1; url=user_management.php");
+    $success = "Deleted" && header("refresh:1; url=display_ris.php");
   } else {
     $err = "Try Again Later";
   }
@@ -91,52 +91,46 @@ require_once('partials/_head.php');
                 </thead>
                 <tbody>
                   <?php
-                  $ret = "SELECT * FROM  bnhs_staff  ORDER BY `bnhs_staff`.`created_at` DESC ";
+                  $ret = "SELECT * FROM requisition_and_issue_slip";
                   $stmt = $mysqli->prepare($ret);
                   $stmt->execute();
                   $res = $stmt->get_result();
-                  while ($cust = $res->fetch_object()) {
+                  while ($ris = $res->fetch_object()) {
                     ?>
                     <tr>
-                      <td><?php echo $cust->staff_id; ?></td>
-                      <td><?php echo $cust->staff_name; ?></td>
-                      <td><?php echo $cust->staff_phoneno; ?></td>
-                      <td><?php echo $cust->staff_email; ?></td>
-                      <td><?php echo $cust->staff_id; ?></td>
-                      <td><?php echo $cust->staff_name; ?></td>
-                      <td><?php echo $cust->staff_phoneno; ?></td>
-                      <td><?php echo $cust->staff_email; ?></td>
-                      <td><?php echo $cust->staff_id; ?></td>
-                      <td><?php echo $cust->staff_name; ?></td>
-                      <td><?php echo $cust->staff_phoneno; ?></td>
-                      <td><?php echo $cust->staff_email; ?></td>
-                      <td><?php echo $cust->staff_id; ?></td>
-                      <td><?php echo $cust->staff_name; ?></td>
-                      <td><?php echo $cust->staff_phoneno; ?></td>
-                      <td><?php echo $cust->staff_email; ?></td>
-                      <td><?php echo $cust->staff_id; ?></td>
-                      <td><?php echo $cust->staff_name; ?></td>
-                      <td><?php echo $cust->staff_phoneno; ?></td>
-                      <td><?php echo $cust->staff_email; ?></td>
-                      <td><?php echo $cust->staff_id; ?></td>
-                      <td><?php echo $cust->staff_name; ?></td>
-                      <td><?php echo $cust->staff_phoneno; ?></td>
-                      <td><?php echo $cust->staff_email; ?></td>
-                      <td><?php echo $cust->staff_id; ?></td>
-                      <td><?php echo $cust->staff_name; ?></td>
+                      <td><?php echo $ris->entity_name; ?></td>
+                      <td><?php echo $ris->fund_cluster; ?></td>
+                      <td><?php echo $ris->division; ?></td>
+                      <td><?php echo $ris->office; ?></td>
+                      <td><?php echo $ris->responsibility_code; ?></td>
+                      <td><?php echo $ris->ris_no; ?></td>
+                      <td><?php echo $ris->stock_no; ?></td>
+                      <td><?php echo $ris->unit; ?></td>
+                      <td><?php echo $ris->item_description; ?></td>
+                      <td><?php echo $ris->requested_qty; ?></td>
+                      <td><?php echo $ris->stock_available; ?></td>
+                      <td><?php echo $ris->issued_qty; ?></td>
+                      <td><?php echo $ris->remarks; ?></td>
+                      <td><?php echo $ris->purpose; ?></td>
+                      <td><?php echo $ris->requested_by_name; ?></td>
+                      <td><?php echo $ris->requested_by_designation; ?></td>
+                      <td><?php echo $ris->requested_by_date; ?></td>
+                      <td><?php echo $ris->approved_by_name; ?></td>
+                      <td><?php echo $ris->approved_by_designation; ?></td>
+                      <td><?php echo $ris->approved_by_date; ?></td>
+                      <td><?php echo $ris->issued_by_name; ?></td>
+                      <td><?php echo $ris->issued_by_designation; ?></td>
+                      <td><?php echo $ris->issued_by_date; ?></td>
+                      <td><?php echo $ris->received_by_name; ?></td>
+                      <td><?php echo $ris->received_by_designation; ?></td>
+                      <td><?php echo $ris->received_by_date; ?></td>
                       <td>
-                        <a href="user_management.php?delete=<?php echo $cust->staff_id; ?>">
-                          <button class="btn btn-sm btn-danger">
-                            <i class="fas fa-trash"></i>
-                            Delete
-                          </button>
+                        <a href="display_ris.php?delete=<?php echo $ris->id; ?>" class="btn btn-sm btn-danger">
+                          <i class="fas fa-trash"></i> Delete
                         </a>
 
-                        <a href="update_staff.php?update=<?php echo $cust->staff_id; ?>">
-                          <button class="btn btn-sm btn-primary">
-                            <i class="fas fa-user-edit"></i>
-                            Update
-                          </button>
+                        <a href="ris_update.php?update=<?php echo $ris->id; ?>" class="btn btn-sm btn-primary">
+                          <i class="fas fa-user-edit"></i> Update
                         </a>
                       </td>
                     </tr>

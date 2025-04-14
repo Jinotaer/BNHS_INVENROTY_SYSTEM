@@ -21,6 +21,7 @@ if (isset($_POST['login'])) {
 }
 require_once('partials/_inhead.php');
 ?>
+
 <body>
   <div class="containers">
     <img src="assets/img/brand/bnhs.png" alt="This is a Logo" style="width: 150px; height: auto;" />
@@ -41,9 +42,9 @@ require_once('partials/_inhead.php');
       <div class="input-field buttons">
         <button type="submit" name="login" style="background-color: #29126d;">LOGIN</button>
       </div>
-
+ 
       <div class="links">
-        <p>Don't have an account? <a href="create_account.php">Signup</a></p>
+        <p style=>Don't have an account? <a href="create_account.php">Signup</a></p>
       </div>
     </form>
   </div>
@@ -52,9 +53,10 @@ require_once('partials/_inhead.php');
   <?php
   require_once('partials/_footer.php');
   ?>
-  </body>
+  <
+</body>
 
-  <!-- Core --> 
-  <script src=""></script>
+<!-- Core -->
+<script src=""></script>
 
-  </html>
+</html>

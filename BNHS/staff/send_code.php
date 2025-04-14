@@ -66,10 +66,10 @@ if (isset($_POST['send_code'])) {
           $mail->send();
           $_SESSION['verify_email'] = $staff_email; // Store for verify_code and password change
           $success = "Verification code sent successfully to $staff_email";
-          
+
           header("Location: verify_code.php");
           exit;
-          
+
         } catch (Exception $e) {
           $err = "Failed to send the verification code. Mailer Error: {$mail->ErrorInfo}";
         }
@@ -96,14 +96,16 @@ require_once('partials/_inhead.php');
       <div class="input-field buttons">
         <button type="submit" name="send_code" style="background-color: #29126d">SEND CODE</button>
       </div>
-
+      <div class="links">
+        <p style="display: flex; justify-content: center;">Back to<a href="create_account.php" style="margin-left: 5px">Login</a></p>
+      </div>
     </form>
 </body>
 <footer class="text-muted fixed-bottom mb-5">
   <div class="container">
     <div class="row align-items-center">
       <div class="col-md-6 text-left text-md-start">
-        &copy; 2020 - <?php echo date('Y'); ?> - Developed By SOVATECH Company
+        &copy; 2024 - <?php echo date('Y'); ?> - Developed By SOVATECH Company
       </div>
       <div class="col-md-6 text-right text-md-end">
         <a href="#" class="nav-link" target="_blank">BNHS INVENTORY SYSTEM</a>

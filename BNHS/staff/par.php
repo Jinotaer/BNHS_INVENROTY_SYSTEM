@@ -1,22 +1,71 @@
 <?php
 session_start();
 include('config/config.php');
-// include('config/checklogin.php');
-// check_login();
-//Delete Staff
-if (isset($_GET['delete'])) {
-  $id = $_GET['delete'];
-  $adn = "DELETE FROM bnhs_staff WHERE staff_id = ?";
-  $stmt = $mysqli->prepare($adn);
-  $stmt->bind_param('s', $id);
-  $stmt->execute();
-  $stmt->close();
-  if ($stmt) {
-    $success = "Deleted" && header("refresh:1; url=user_management.php");
-  } else {
-    $err = "Try Again Later";
+
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+  // Sanitize and collect form data
+  function sanitize($data)
+  {
+    return htmlspecialchars(trim($data));
   }
+
+  $entity_name = sanitize($_POST['entity_name']);
+  $fund_cluster = sanitize($_POST['fund_cluster']);
+  $par_no = sanitize($_POST['par_no']);
+  $quantity = (int) $_POST['quantity'];
+  $unit = sanitize($_POST['unit']);
+  $descriptions = sanitize($_POST['descriptions']);
+  $property_number = sanitize($_POST['property_number']);
+  $date_acquired = sanitize($_POST['date_acquired']);
+  $unit_cost = (float) $_POST['unit_cost'];
+  $total_amount = $quantity * $unit_cost;
+  $end_user_name = sanitize($_POST['end_user_name']);
+  $receiver_position = sanitize($_POST['receiver_position']);
+  $receiver_date = sanitize($_POST['receiver_date']);
+  $custodian_name = sanitize($_POST['custodian_name']);
+  $custodian_position = sanitize($_POST['custodian_position']);
+  $custodian_date = sanitize($_POST['custodian_date']);
+
+  $stmt = $mysqli->prepare("INSERT INTO property_acknowledgment_receipt (
+    entity_name, fund_cluster, par_no, quantity, unit, descriptions, property_number, date_acquired, unit_cost, total_amount, end_user_name, receiver_position, receiver_date, custodian_name, custodian_position, custodian_date
+
+  ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+  if ($stmt === false) {
+    die("MySQL prepare failed: " . $mysqli->error);
+  }
+
+  $stmt->bind_param(
+    "sssisssssdssssss",
+    $entity_name,
+    $fund_cluster,
+    $par_no,
+    $quantity,
+    $unit,
+    $descriptions,
+    $property_number,
+    $date_acquired,
+    $unit_cost,
+    $total_amount,
+    $end_user_name,
+    $receiver_position,
+    $receiver_date,
+    $custodian_name,
+    $custodian_position,
+    $custodian_date
+  );
+
+  if ($stmt->execute()) {
+    $success = "Property Acknowledgment Receipt Created Successfully";
+    header("refresh:1; url=par.php");
+  } else {
+    $err = "Error: " . $stmt->error;
+    header("refresh:1; url=par.php");
+  }
+
+  $stmt->close();
 }
+
 require_once('partials/_head.php');
 ?>
 
@@ -79,9 +128,9 @@ require_once('partials/_head.php');
 
             <div class="card-body ">
 
-              <form method="POST" action="save_building_info.php" class="border border-light p-4 rounded">
+              <form method="POST" role="form" class="border border-light p-4 rounded">
                 <div class="container mt-4">
-                <h2 class="text-center mb-4 text-uppercase"> Purchase Acceptance Report</h2>
+                  <h2 class="text-center mb-4 text-uppercase"> Purchase Acceptance Report</h2>
                   <!-- Entity Info -->
                   <div class="row mt-3 mb-3">
                     <div class="col-md-4">
@@ -110,7 +159,7 @@ require_once('partials/_head.php');
                     </div>
                     <div class="col-md-4">
                       <label>Description</label>
-                      <input style="color: #000000;" type="text" class="form-control" name="description">
+                      <input style="color: #000000;" type="text" class="form-control" name="descriptions">
                     </div>
                     <div class="col-md-4">
                       <label>Property Number</label>
@@ -128,8 +177,9 @@ require_once('partials/_head.php');
                       <input style="color: #000000;" type="text" class="form-control" name="unit_cost">
                     </div>
                     <div class="col-md-4">
-                      <label>Total Amount</label>
-                      <input style="color: #000000;" type="text" class="form-control" name="total_amount">
+                      <label class="form-label">Total Amount</label>
+                      <input style="color: #000000; background-color: white;" type="text" class="form-control"
+                        name="total_amount" readonly>
                     </div>
                   </div>
 
@@ -190,4 +240,22 @@ require_once('partials/_head.php');
   ?>
 </body>
 
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const qtyInput = document.querySelector('[name="quantity"]');
+    const priceInput = document.querySelector('[name="unit_cost"]');
+    const totalInput = document.querySelector('[name="total_amount"]');
+
+    function updateTotal() {
+      const qty = parseFloat(qtyInput.value) || 0;
+      const price = parseFloat(priceInput.value) || 0;
+      totalInput.value = (qty * price).toFixed(2);
+    }
+
+    if (qtyInput && priceInput && totalInput) {
+      qtyInput.addEventListener("input", updateTotal);
+      priceInput.addEventListener("input", updateTotal);
+    }
+  });
+</script>
 </html>

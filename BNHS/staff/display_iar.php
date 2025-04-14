@@ -6,13 +6,13 @@ include('config/config.php');
 //Delete Staff
 if (isset($_GET['delete'])) {
   $id = $_GET['delete'];
-  $adn = "DELETE FROM  bnhs_staff  WHERE  staff_id = ?";
+  $adn = "DELETE FROM  inspection_acceptance_reports  WHERE  id = ?";
   $stmt = $mysqli->prepare($adn);
   $stmt->bind_param('s', $id);
   $stmt->execute();
   $stmt->close();
   if ($stmt) {
-    $success = "Deleted" && header("refresh:1; url=user_management.php");
+    $success = "Deleted" && header("refresh:1; url=display_iar.php");
   } else {
     $err = "Try Again Later";
   }
@@ -52,7 +52,7 @@ require_once('partials/_head.php');
               </div>
               <div class="col text-right">
                 <i></i>
-                <a target="_blank" href="print_files.php" class="btn btn-sm btn-primary">
+                <a target="_blank" href="print_iar_files.php" class="btn btn-sm btn-primary">
                   <i class="material-icons-sharp text-primary"></i>
                   Print files</a>
               </div>
@@ -91,46 +91,46 @@ require_once('partials/_head.php');
                 </thead>
                 <tbody>
                   <?php
-                  $ret = "SELECT * FROM  bnhs_staff  ORDER BY `bnhs_staff`.`created_at` DESC ";
+                  $ret = "SELECT * FROM  inspection_acceptance_reports  ORDER BY `inspection_acceptance_reports`.`created_at` DESC ";
                   $stmt = $mysqli->prepare($ret);
                   $stmt->execute();
                   $res = $stmt->get_result();
-                  while ($cust = $res->fetch_object()) {
+                  while ($iar = $res->fetch_object()) {
                     ?>
                     <tr>
-                      <td><?php echo $cust->staff_id; ?></td>
-                      <td><?php echo $cust->staff_name; ?></td>
-                      <td><?php echo $cust->staff_phoneno; ?></td>
-                      <td><?php echo $cust->staff_email; ?></td>
-                      <td><?php echo $cust->staff_id; ?></td>
-                      <td><?php echo $cust->staff_name; ?></td>
-                      <td><?php echo $cust->staff_phoneno; ?></td>
-                      <td><?php echo $cust->staff_email; ?></td>
-                      <td><?php echo $cust->staff_id; ?></td>
-                      <td><?php echo $cust->staff_name; ?></td>
-                      <td><?php echo $cust->staff_phoneno; ?></td>
-                      <td><?php echo $cust->staff_email; ?></td>
-                      <td><?php echo $cust->staff_id; ?></td>
-                      <td><?php echo $cust->staff_name; ?></td>
-                      <td><?php echo $cust->staff_phoneno; ?></td>
-                      <td><?php echo $cust->staff_email; ?></td>
-                      <td><?php echo $cust->staff_id; ?></td>
-                      <td><?php echo $cust->staff_name; ?></td>
-                      <td><?php echo $cust->staff_phoneno; ?></td>
-                      <td><?php echo $cust->staff_email; ?></td>
-                      <td><?php echo $cust->staff_id; ?></td>
-                      <td><?php echo $cust->staff_name; ?></td>
-                      <td><?php echo $cust->staff_phoneno; ?></td>
-                      <td><?php echo $cust->staff_email; ?></td>
+                      <td><?php echo $iar->entity_name; ?></td>
+                      <td><?php echo $iar->fund_cluster; ?></td>
+                      <td><?php echo $iar->supplier; ?></td>
+                      <td><?php echo $iar->po_no_date; ?></td>
+                      <td><?php echo $iar->req_office; ?></td>
+                      <td><?php echo $iar->responsibility_center; ?></td>
+                      <td><?php echo $iar->iar_no; ?></td>
+                      <td><?php echo $iar->iar_date; ?></td>
+                      <td><?php echo $iar->stock_no; ?></td>
+                      <td><?php echo $iar->remarks; ?></td>
+                      <td><?php echo $iar->item_description; ?></td>
+                      <td><?php echo $iar->unit; ?></td>
+                      <td><?php echo $iar->quantity; ?></td>
+                      <td><?php echo $iar->unit_price; ?></td>
+                      <td><?php echo $iar->total_price; ?></td>
+                      <td><?php echo $iar->receiver_name; ?></td>
+                      <td><?php echo $iar->teacher_id; ?></td>
+                      <td><?php echo $iar->position; ?></td>
+                      <td><?php echo $iar->date_inspected; ?></td>
+                      <td><?php echo $iar->inspectors; ?></td>
+                      <td><?php echo $iar->barangay_councilor; ?></td>
+                      <td><?php echo $iar->pta_observer; ?></td>
+                      <td><?php echo $iar->date_received; ?></td>
+                      <td><?php echo $iar->property_custodian; ?></td>
                       <td>
-                        <a href="user_management.php?delete=<?php echo $cust->staff_id; ?>">
+                        <a href="display_iar.php?delete=<?php echo $iar->id; ?>">
                           <button class="btn btn-sm btn-danger">
                             <i class="fas fa-trash"></i>
                             Delete
                           </button>
                         </a>
 
-                        <a href="update_staff.php?update=<?php echo $cust->staff_id; ?>">
+                        <a href="iar_update.php?update=<?php echo $iar  ->id; ?>">
                           <button class="btn btn-sm btn-primary">
                             <i class="fas fa-user-edit"></i>
                             Update

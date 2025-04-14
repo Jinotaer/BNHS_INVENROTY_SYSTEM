@@ -159,3 +159,13 @@ form .links a
   margin-right: auto; 
   display: block;
 }
+.links a {
+  color: #007BFF;
+  text-decoration: none;
+  transition: color 0.3s ease;  
+}
+
+.links a:hover {
+  color:  #00BFFF;
+  text-decoration: underline;
+}

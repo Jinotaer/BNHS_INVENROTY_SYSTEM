@@ -1,22 +1,64 @@
 <?php
 session_start();
 include('config/config.php');
-// include('config/checklogin.php');
-// check_login();
-//Delete Staff
-if (isset($_GET['delete'])) {
-  $id = $_GET['delete'];
-  $adn = "DELETE FROM bnhs_staff WHERE staff_id = ?";
-  $stmt = $mysqli->prepare($adn);
-  $stmt->bind_param('s', $id);
-  $stmt->execute();
-  $stmt->close();
-  if ($stmt) {
-    $success = "Deleted" && header("refresh:1; url=user_management.php");
-  } else {
-    $err = "Try Again Later";
+
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+  // Sanitize and collect form data
+  function sanitize($data) {
+    return htmlspecialchars(trim($data));
   }
+
+  $entity_name = sanitize($_POST['entity_name']);
+  $fund_cluster = sanitize($_POST['fund_cluster']);
+  $division = sanitize($_POST['division']);
+  $office = sanitize($_POST['office']);
+  $responsibility_code = sanitize($_POST['responsibility_code']);
+  $ris_no = sanitize($_POST['ris_no']);
+  $stock_no = sanitize($_POST['stock_no']);
+  $unit = sanitize($_POST['unit']);
+  $item_description = sanitize($_POST['item_description']);
+  $requested_qty = sanitize($_POST['requested_qty']);
+  $stock_available = sanitize($_POST['stock_available']);
+  $issued_qty = sanitize($_POST['issued_qty']);
+  $remarks = sanitize($_POST['remarks']);
+  $purpose = sanitize($_POST['purpose']);
+  $requested_by_name = sanitize($_POST['requested_by_name']);
+  $requested_by_designation =  sanitize($_POST['requested_by_designation']);
+  $requested_by_date = sanitize($_POST['requested_by_date']);
+  $approved_by_name = sanitize($_POST['approved_by_name']);
+  $approved_by_designation = sanitize($_POST['approved_by_designation']);
+  $approved_by_date = sanitize($_POST['approved_by_date']);
+  $issued_by_name = sanitize($_POST['issued_by_name']);
+  $issued_by_designation = sanitize($_POST['issued_by_designation']);
+  $issued_by_date = sanitize($_POST['issued_by_date']);
+  $received_by_name= sanitize($_POST['received_by_name']);
+  $received_by_designation = sanitize($_POST['received_by_designation']);
+  $received_by_date = sanitize($_POST['received_by_date']);
+
+  $stmt = $mysqli->prepare("INSERT INTO  requisition_and_issue_slip (
+   entity_name, fund_cluster, division, office, responsibility_code,ris_no, stock_no, unit, item_description, requested_qty, stock_available, issued_qty, remarks, purpose, requested_by_name, requested_by_designation, requested_by_date, approved_by_name, approved_by_designation, approved_by_date, issued_by_name,issued_by_designation, issued_by_date, received_by_name, received_by_designation, received_by_date
+  ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+  if ($stmt === false) {
+    die("MySQL prepare failed: " . $mysqli->error);
+  }
+
+  $stmt->bind_param(
+    "sssssssssiiissssssssssssss",
+    $entity_name, $fund_cluster, $division, $office, $responsibility_code, $ris_no, $stock_no, $unit, $item_description, $requested_qty, $stock_available, $issued_qty, $remarks, $purpose, $requested_by_name, $requested_by_designation, $requested_by_date, $approved_by_name, $approved_by_designation, $approved_by_date, $issued_by_name,$issued_by_designation, $issued_by_date, $received_by_name, $received_by_designation, $received_by_date
+  );
+
+  if ($stmt->execute()) {
+    $success = "Requisition and Issue Slip Created Successfully";
+    header("refresh:1; url=ris.php");
+  } else {
+    $err = "Error: " . $stmt->error;
+    header("refresh:1; url=ris.php");
+  }
+
+  $stmt->close();
 }
+
 require_once('partials/_head.php');
 ?>
 
@@ -78,7 +120,7 @@ require_once('partials/_head.php');
 
 
             <div class="card-body ">
-              <form method="POST" action="save_ris.php" class="border border-light p-4 rounded">
+              <form method="POST" role="form" class="border border-light p-4 rounded">
                 <div class="container mt-4">
                   <h2 class="text-center mb-4 text-uppercase">Requisition and Issue Slip</h2>
 
@@ -125,22 +167,22 @@ require_once('partials/_head.php');
                   <div class="row mb-3">
                   <div class="col-md-3">
                       <label class="form-label">Item Description</label>
-                      <input type="text" class="form-control" name="item_description" required>
+                      <input type="text" style="color: #000000;" class="form-control" name="item_description" required>
                     </div>
                     <div class="col-md-3">
                       <label class="form-label">Requested Quantity</label>
-                      <input type="number" class="form-control" name="requested_qty" required>
+                      <input type="number" style="color: #000000;" class="form-control" name="requested_qty" required>
                     </div>
                     <div class="col-md-3">
                       <label class="form-label">Stock Available (Yes/No)</label>
-                      <select class="form-control" name="stock_available" required>
+                      <select style="color: #000000;" class="form-control" name="stock_available" required>
                         <option value="Yes">Yes</option>
                         <option value="No">No</option>
                       </select>
                     </div>
                     <div class="col-md-3">
                       <label class="form-label">Issued Quantity</label>
-                      <input type="number" class="form-control" name="issued_qty" required>
+                      <input type="number" style="color: #000000;" class="form-control" name="issued_qty" required>
                     </div>
                     
                   </div>
@@ -148,11 +190,11 @@ require_once('partials/_head.php');
                   <div class="row mb-3">
                   <div class="col-md-3">
                       <label class="form-label">Remarks</label>
-                      <input type="text" class="form-control" name="remarks">
+                      <input type="text" style="color: #000000;" class="form-control" name="remarks">
                     </div>
                     <div class="col-md-3">
                       <label class="form-label">Purpose</label>
-                      <input type="text" class="form-control" name="purpose" required>
+                      <input type="text" style="color: #000000;" class="form-control" name="purpose" required>
                     </div>
                   </div>
 
@@ -160,15 +202,15 @@ require_once('partials/_head.php');
                   <div class="row mb-3">
                     <div class="col-md-3">
                       <label class="form-label">Name</label>
-                      <input type="text" class="form-control" name="requested_by_name" required>
+                      <input type="text" style="color: #000000;" class="form-control" name="requested_by_name" required>
                     </div>
                     <div class="col-md-3">
                       <label class="form-label">Designation</label>
-                      <input type="text" class="form-control" name="requested_by_designation" required>
+                      <input type="text" style="color: #000000;" class="form-control" name="requested_by_designation" required>
                     </div>
                     <div class="col-md-3">
                       <label class="form-label">Date</label>
-                      <input type="date" class="form-control" name="requested_by_date" required>
+                      <input type="date" style="color: #000000;" class="form-control" name="requested_by_date" required>
                     </div>
                   </div>
 
@@ -176,15 +218,15 @@ require_once('partials/_head.php');
                   <div class="row mb-3">
                     <div class="col-md-3">
                       <label class="form-label">Name</label>
-                      <input type="text" class="form-control" name="approved_by_name" required>
+                      <input type="text" style="color: #000000;" class="form-control" name="approved_by_name" required>
                     </div>
                     <div class="col-md-3">
                       <label class="form-label">Designation</label>
-                      <input type="text" class="form-control" name="approved_by_designation" required>
+                      <input type="text" style="color: #000000;" class="form-control" name="approved_by_designation" required>
                     </div>
                     <div class="col-md-3">
                       <label class="form-label">Date</label>
-                      <input type="date" class="form-control" name="approved_by_date" required>
+                      <input type="date" style="color: #000000;" class="form-control" name="approved_by_date" required>
                     </div>
                   </div>
 
@@ -192,15 +234,15 @@ require_once('partials/_head.php');
                   <div class="row mb-3">
                     <div class="col-md-3">
                       <label class="form-label">Name</label>
-                      <input type="text" class="form-control" name="issued_by_name" required>
+                      <input type="text" style="color: #000000;" class="form-control" name="issued_by_name" required>
                     </div>
                     <div class="col-md-3">
                       <label class="form-label">Designation</label>
-                      <input type="text" class="form-control" name="issued_by_designation" required>
+                      <input type="text" style="color: #000000;" class="form-control" name="issued_by_designation" required>
                     </div>
                     <div class="col-md-3">
                       <label class="form-label">Date</label>
-                      <input type="date" class="form-control" name="issued_by_date" required>
+                      <input type="date" style="color: #000000;" class="form-control" name="issued_by_date" required>
                     </div>
                   </div>
 
@@ -208,15 +250,15 @@ require_once('partials/_head.php');
                   <div class="row mb-3">
                     <div class="col-md-3">
                       <label class="form-label">Name</label>
-                      <input type="text" class="form-control" name="received_by_name" required>
+                      <input type="text" style="color: #000000;" class="form-control" name="received_by_name" required>
                     </div>
                     <div class="col-md-3">
                       <label class="form-label">Designation</label>
-                      <input type="text" class="form-control" name="received_by_designation" required>
+                      <input type="text" style="color: #000000;" class="form-control" name="received_by_designation" required>
                     </div>
                     <div class="col-md-3">
                       <label class="form-label">Date</label>
-                      <input type="date" class="form-control" name="received_by_date" required>
+                      <input type="date" style="color: #000000;" class="form-control" name="received_by_date" required>
                     </div>
                   </div>
 
