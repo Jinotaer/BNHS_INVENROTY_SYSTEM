@@ -1,8 +1,8 @@
 <?php
 session_start();
 include('config/config.php');
-// include('config/checklogin.php');
-// check_login();
+include('config/checklogin.php');
+check_login();
 //Update Profile
 if (isset($_POST['ChangeProfile'])) {
   $staff_id = $_SESSION['staff_id'];

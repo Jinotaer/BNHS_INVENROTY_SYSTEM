@@ -1,6 +1,6 @@
 <?php
 $staff_id = $_SESSION['staff_id'];
-//$login_id = $_SESSION['login_id'];
+$login_id = $_SESSION['staff_id'];
 $ret = "SELECT * FROM  bnhs_staff  WHERE staff_id = '$staff_id'";
 $stmt = $mysqli->prepare($ret);
 $stmt->execute();

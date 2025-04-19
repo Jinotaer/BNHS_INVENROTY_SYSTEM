@@ -1,7 +1,8 @@
 <?php
 session_start();
 include('config/config.php');
-
+include('config/checklogin.php');
+check_login();
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
   // Sanitize and collect form data
   function sanitize($data)
@@ -14,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
   $par_no = sanitize($_POST['par_no']);
   $quantity = (int) $_POST['quantity'];
   $unit = sanitize($_POST['unit']);
-  $descriptions = sanitize($_POST['descriptions']);
+  $item_description = sanitize($_POST['item_description']);
   $property_number = sanitize($_POST['property_number']);
   $date_acquired = sanitize($_POST['date_acquired']);
   $unit_cost = (float) $_POST['unit_cost'];
@@ -27,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
   $custodian_date = sanitize($_POST['custodian_date']);
 
   $stmt = $mysqli->prepare("INSERT INTO property_acknowledgment_receipt (
-    entity_name, fund_cluster, par_no, quantity, unit, descriptions, property_number, date_acquired, unit_cost, total_amount, end_user_name, receiver_position, receiver_date, custodian_name, custodian_position, custodian_date
+    entity_name, fund_cluster, par_no, quantity, unit, item_description, property_number, date_acquired, unit_cost, total_amount, end_user_name, receiver_position, receiver_date, custodian_name, custodian_position, custodian_date
 
   ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
@@ -42,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $par_no,
     $quantity,
     $unit,
-    $descriptions,
+    $item_description,
     $property_number,
     $date_acquired,
     $unit_cost,
@@ -159,7 +160,7 @@ require_once('partials/_head.php');
                     </div>
                     <div class="col-md-4">
                       <label>Description</label>
-                      <input style="color: #000000;" type="text" class="form-control" name="descriptions">
+                      <input style="color: #000000;" type="text" class="form-control" name="item_description">
                     </div>
                     <div class="col-md-4">
                       <label>Property Number</label>

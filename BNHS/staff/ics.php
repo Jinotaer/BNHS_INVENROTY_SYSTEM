@@ -1,8 +1,8 @@
 <?php
 session_start();
 include('config/config.php');
-// include('config/checklogin.php');
-// check_login();
+include('config/checklogin.php');
+check_login();
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
   // Sanitize and collect form data

@@ -1,6 +1,8 @@
 <?php
 session_start();
 include('config/config.php'); // Ensure this file contains a valid $mysqli connection
+include('config/checklogin.php');
+check_login();
 
 if (isset($_POST['change_password']) && isset($_SESSION['verified_email'])) {
     if (empty($_POST['new_password']) || empty($_POST['confirm_password'])) {

@@ -1,6 +1,6 @@
 <?php
 $staff_id = $_SESSION['staff_id'];
-//$login_id = $_SESSION['login_id'];
+$login_id = $_SESSION['staff_id'];
 $ret = "SELECT * FROM   bnhs_staff  WHERE staff_id = '$staff_id'";
 $stmt = $mysqli->prepare($ret);
 $stmt->execute();
@@ -91,7 +91,7 @@ while ($staff = $res->fetch_object()) {
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="track_inventory.php">
+            <a class="nav-link" href="track_inventory copy.php">
               <i><span class="material-icons-sharp text-primary">plagiarism</span></i> Track Inventory
             </a>
           </li>

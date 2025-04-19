@@ -1,8 +1,8 @@
 <?php
 session_start();
 include('config/config.php');
-// include('config/checklogin.php');
-// check_login();
+include('config/checklogin.php');
+check_login();
 //Delete Staff
 if (isset($_GET['delete'])) {
   $id = $_GET['delete'];
@@ -78,10 +78,14 @@ require_once('partials/_head.php');
               <table class="table align-items-center table-flush">
                 <thead class="thead-light">
                   <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Full Name</th>
-                    <th scope="col">Contact Number</th>
-                    <th scope="col">Email</th>
+                    <th scope="col">Item Description</th>
+                    <th scope="col">Item No.</th>
+                    <th scope="col">End User</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Unit Cost</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Total Cost</th>
+                    <th scope="col">Custodian</th>
                     <th scope="col">Actions</th>
                   </tr>
                 </thead>

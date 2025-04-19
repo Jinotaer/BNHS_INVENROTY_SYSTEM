@@ -1,8 +1,8 @@
 <?php
 session_start();
 include('config/config.php');
-// include('config/checklogin.php');
-// check_login();
+include('config/checklogin.php');
+check_login();
 //Delete Staff
 if (isset($_GET['delete'])) {
   $id = $_GET['delete'];
@@ -93,7 +93,7 @@ require_once('partials/_head.php');
                       <td><?php echo $par->par_no; ?></td>
                       <td><?php echo $par->quantity; ?></td>
                       <td><?php echo $par->unit; ?></td>
-                      <td><?php echo $par->descriptions; ?></td>
+                      <td><?php echo $par->item_description; ?></td>
                       <td><?php echo $par->property_number; ?></td>
                       <td><?php echo $par->date_acquired; ?></td>
                       <td><?php echo $par->unit_cost; ?></td>
