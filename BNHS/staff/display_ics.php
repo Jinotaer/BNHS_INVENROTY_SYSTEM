@@ -52,7 +52,7 @@ require_once('partials/_head.php');
               </div>
               <div class="col text-right">
                 <i></i>
-                <a href="orders_reports.php" class="btn btn-sm btn-primary">
+                <a href="print_ics_files.php" class="btn btn-sm btn-primary" target="_blank">
                   <i class="material-icons-sharp text-primary"></i>
                   Print files</a>
               </div>
@@ -100,7 +100,8 @@ require_once('partials/_head.php');
                       <td><?php echo $ics->inventory_item_no; ?></td><td><?php echo $ics->estimated_life; ?></td>
                       <td><?php echo $ics->end_user_name; ?></td>
                       <td><?php echo $ics->end_user_position; ?></td>
-                      <td><?php echo $ics->date_received_user; ?></td><td><?php echo $ics->custodian_name; ?></td>
+                      <td><?php echo $ics->date_received_user; ?></td>
+                      <td><?php echo $ics->custodian_name; ?></td>
                       <td><?php echo $ics->custodian_position; ?></td>
                       <td><?php echo $ics->date_received_custodian; ?></td>
                       <td>

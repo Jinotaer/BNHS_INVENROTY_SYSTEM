@@ -9,6 +9,7 @@ if (isset($_POST['add'])) {
     } elseif (strlen($_POST['staff_password']) < 8) { // Validate password length
         $err = "Password must be at least 8 characters long.";
     } else {
+    
         $staff_name = $_POST['staff_name'];
         $staff_phoneno = $_POST['staff_phoneno'];
         $staff_email = $_POST['staff_email'];

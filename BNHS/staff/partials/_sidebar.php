@@ -106,13 +106,13 @@ while ($staff = $res->fetch_object()) {
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="display_ris.php" style="padding: 3px 24px;">
-                  <i><span class="material-icons-sharp text-primary">format_list_bulleted</span></i> RIS
+                <a class="nav-link" href="display_ics.php" style="padding: 3px 24px;">
+                  <i><span class="material-icons-sharp text-primary">format_list_bulleted</span></i> ICS
                 </a>
               </li>
               <li class="nav-item" >
-                <a class="nav-link" href="display_ics.php" style="padding: 3px 24px;">
-                  <i><span class="material-icons-sharp text-primary">format_list_bulleted</span></i> ICS
+                <a class="nav-link" href="display_ris.php" style="padding: 3px 24px;">
+                  <i><span class="material-icons-sharp text-primary">format_list_bulleted</span></i> RIS
                 </a>
               </li>
               <li class="nav-item">

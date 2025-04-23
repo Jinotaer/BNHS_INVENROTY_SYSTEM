@@ -51,7 +51,7 @@ require_once('partials/_head.php');
                 <h2 class="text-center mb-3 pt-3 text-uppercase">Requisition and Issue Slip</h2>
               </div>
               <div class="col text-right">
-                <a href="orders_reports.php" class="btn btn-sm btn-primary">
+                <a href="print_ris_files.php" class="btn btn-sm btn-primary">
                   <i class="material-icons-sharp text-primary"></i>
                   Print files</a>
               </div>
