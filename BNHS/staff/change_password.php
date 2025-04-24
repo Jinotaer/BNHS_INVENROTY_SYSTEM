@@ -26,6 +26,7 @@ if (isset($_POST['change_password']) && isset($_SESSION['verified_email'])) {
                 unset($_SESSION['verified_email']);
                 $success = "Password updated successfully.";
                 // Redirect to login page 
+                $success = "Password updated successfully.";
                 header("Location: index.php");
             } else {
                 $err = "Error: " . $updateStmt->error;

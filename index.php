@@ -1,11 +1,11 @@
 <?php 
 session_start();
 
-// Check if user has verified with reCAPTCHA
-if (!isset($_SESSION['recaptcha_verified']) || $_SESSION['recaptcha_verified'] !== true) {
-    header('Location: verify.php');
-    exit();
-}
+// // Check if user has verified with reCAPTCHA
+// if (!isset($_SESSION['recaptcha_verified']) || $_SESSION['recaptcha_verified'] !== true) {
+//     header('Location: verify.php');
+//     exit();
+// }
 
 require_once __DIR__ . "/BNHS/staff/assets/vendor/autoload.php";
 

@@ -4,30 +4,25 @@ include('config/config.php'); // Ensure this file contains a valid $mysqli conne
 
 if (isset($_POST['add'])) {
     // Prevent Posting Blank Values
-    if ($_POST['staff_password'] !== $_POST['staff_pass_confirm']) {
-        $err = "Password doesn't match.";
+    if (empty($_POST["staff_phoneno"]) || empty($_POST["staff_id"]) || empty($_POST["staff_name"]) || empty($_POST['staff_email']) || empty($_POST['staff_password'])) {
+        $err = "Blank Values Not Accepted";
     } elseif (strlen($_POST['staff_password']) < 8) { // Validate password length
         $err = "Password must be at least 8 characters long.";
     } else {
-      
+    
         $staff_name = $_POST['staff_name'];
+        $staff_phoneno = $_POST['staff_phoneno'];
         $staff_email = $_POST['staff_email'];
         $staff_password = sha1(md5($_POST['staff_password'])); // Hash This
         $staff_id = $_POST['staff_id'];
 
-        $stmt = $pdo->prepare("SELECT * FROM bnhs_staff WHERE staff_email = ?");
-        $stmt -> execute([$staff_email]);
-
-        if($stmt -> rowCount() > 0) {
-          $err = "Email is already exist";
-      } 
         // Insert Captured Information into the Database Table
-        $postQuery = "INSERT INTO bnhs_staff (staff_id, staff_name, staff_email, staff_password) VALUES(?,?,?,?)";
+        $postQuery = "INSERT INTO bnhs_staff (staff_id, staff_name, staff_phoneno, staff_email, staff_password) VALUES(?,?,?,?,?)";
         $postStmt = $mysqli->prepare($postQuery);
 
         if ($postStmt) {
             // Bind Parameters
-            $rc = $postStmt->bind_param('ssss', $staff_id, $staff_name, $staff_email, $staff_password);
+            $rc = $postStmt->bind_param('sssss', $staff_id, $staff_name, $staff_phoneno, $staff_email, $staff_password);
 
             // Execute the Query
             if ($postStmt->execute()) {
@@ -44,13 +39,12 @@ if (isset($_POST['add'])) {
 require_once('partials/_inhead.php');
 require_once('config/code-generator.php');
 ?>
-
 <body>
   <div class="containers">
    <img src="assets/img/brand/bnhs.png" alt="This is a Logo" style="width: 120px; height: auto;">
    <form method="POST" rule="form">
    <div class="field">
-      <div class="input-fields" style="">
+      <div class="input-fields" style="mar">
         <input type="text" placeholder="ID" name="staff_id" required>
         <!-- <input class="form-control" value="<?php echo $cus_id;?>" required name="staff_id"  type="hidden"> -->
       </div>
@@ -63,17 +57,17 @@ require_once('config/code-generator.php');
     </div>
     <div class="field"> 
       <div class="input-fields">
+        <input type="number" placeholder="Phone Number" name="staff_phoneno" required>
+      </div>
+    </div>
+    <div class="field">
+      <div class="input-fields">
         <input type="email" placeholder="Email" name="staff_email" required>
       </div>
     </div>
     <div class="field">
       <div class="input-fields">
         <input type="password" placeholder="Password" name="staff_password" required>
-      </div>
-    </div>
-    <div class="field">
-      <div class="input-fields">
-        <input type="password" placeholder="Confirm Password" name="staff_pass_confirm" required>
       </div>
     </div>
     <div class="input-field buttons">

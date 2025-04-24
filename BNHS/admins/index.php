@@ -4,14 +4,14 @@ include('config/config.php'); // Ensure this file contains a valid $mysqli conne
 //check if already logged in move to home page
 //login 
 if (isset($_POST['login'])) {
-  $staff_email = $_POST['staff_email'];
-  $staff_password = sha1(md5($_POST['staff_password'])); //double encrypt to increase security
-  $stmt = $mysqli->prepare("SELECT staff_email, staff_password, staff_id  FROM   bnhs_staff WHERE (staff_email =? AND staff_password =?)"); //sql to log in user
-  $stmt->bind_param('ss', $staff_email, $staff_password); //bind fetched parameters
+  $admin_email = $_POST['admin_email'];
+  $admin_password = sha1(md5($_POST['admin_password'])); //double encrypt to increase security
+  $stmt = $mysqli->prepare("SELECT admin_email, admin_password, admin_id  FROM   bnhs_admin WHERE (admin_email =? AND admin_password =?)"); //sql to log in user
+  $stmt->bind_param('ss', $admin_email, $admin_password); //bind fetched parameters
   $stmt->execute(); //execute bind 
-  $stmt->bind_result($staff_email, $staff_password, $staff_id); //bind result
+  $stmt->bind_result($admin_email, $admin_password, $admin_id); //bind result
   $rs = $stmt->fetch();
-  $_SESSION['staff_id'] = $staff_id;
+  $_SESSION['admin_id'] = $admin_id;
   if ($rs) {
     //if its sucessfull
     header("location:dashboard.php");
@@ -28,12 +28,12 @@ require_once('partials/_inhead.php');
     <form method="POST" rule="form">
       <div class="field email-field">
         <div class="input-field">
-          <input type="text" placeholder="Email" name="staff_email" required />
+          <input type="text" placeholder="Email" name="admin_email" required />
         </div>
       </div>
       <div class="field create-password">
         <div class="input-field">
-          <input class="username" type="password" placeholder="Password" name="staff_password" required />
+          <input class="username" type="password" placeholder="Password" name="admin_password" required />
         </div>
       </div>
       <div class="links" style="text-align: end;">

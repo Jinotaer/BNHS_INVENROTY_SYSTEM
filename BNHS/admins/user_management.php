@@ -57,7 +57,6 @@ require_once('partials/_head.php');
                   <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Full Name</th>
-                    <th scope="col">Contact Number</th>
                     <th scope="col">Email</th>
                     <th scope="col">Actions</th>
                   </tr>
@@ -68,27 +67,26 @@ require_once('partials/_head.php');
                   $stmt = $mysqli->prepare($ret);
                   $stmt->execute();
                   $res = $stmt->get_result();
-                  while ($cust = $res->fetch_object()) {
+                  while ($staff = $res->fetch_object()) {
                   ?>
                     <tr>
-                      <td><?php echo $cust->staff_id; ?></td>
-                      <td><?php echo $cust->staff_name; ?></td>
-                      <td><?php echo $cust->staff_phoneno; ?></td>
-                      <td><?php echo $cust->staff_email; ?></td>
+                      <td><?php echo $staff->staff_id; ?></td>
+                      <td><?php echo $staff->staff_name; ?></td>
+                      <td><?php echo $staff->staff_email; ?></td>
                       <td>
-                        <a href="user_management.php?delete=<?php echo $cust->staff_id; ?>">
+                        <a href="user_management.php?delete=<?php echo $staff->staff_id; ?>">
                           <button class="btn btn-sm btn-danger">
                             <i class="fas fa-trash"></i>
                             Delete
                           </button>
                         </a>
 
-                        <a href="update_staff.php?update=<?php echo $cust->staff_id; ?>">
-                          <button class="btn btn-sm btn-primary">
-                            <i class="fas fa-user-edit"></i>
-                            Update
-                          </button>
-                        </a>
+                          <!-- <a href="update_staff.php?update=<?php echo $staff->staff_id; ?>">
+                            <button class="btn btn-sm btn-primary">
+                              <i class="fas fa-user-edit"></i>
+                              Update
+                            </button>
+                          </a> -->
                       </td>
                     </tr>
                   <?php } ?>

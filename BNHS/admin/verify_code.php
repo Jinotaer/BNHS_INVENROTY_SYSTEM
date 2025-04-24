@@ -5,23 +5,34 @@ include('config/config.php'); // Ensure this file contains a valid $mysqli conne
 if (isset($_POST['submit'])) {
   $code = $_POST['codes'];
 
-  // Check if the code exists in the database
-  $checkQuery = "SELECT COUNT(*) FROM verification_codes WHERE code = ?";
+  // Check if the code exists in the database with timestamp validation
+  $checkQuery = "SELECT code, created_at FROM verification_codes WHERE code = ? AND created_at >= DATE_SUB(NOW(), INTERVAL 10 MINUTE)";
   $checkStmt = $mysqli->prepare($checkQuery);
   if ($checkStmt) {
     $checkStmt->bind_param('i', $code);
     $checkStmt->execute();
-    $checkStmt->bind_result($codeCount);
-    $checkStmt->fetch();
-    $checkStmt->close();
+    $checkStmt->store_result();
 
-    if ($codeCount > 0) {
-      // Code found, redirect to change_password.php
+    if ($checkStmt->num_rows > 0) {
+      // Code is valid and not expired
       header("Location: change_password.php");
       exit();
     } else {
-      $err = "Invalid code";
+      // Check if code exists but expired
+      $expiredCheck = "SELECT code FROM verification_codes WHERE code = ?";
+      $expiredStmt = $mysqli->prepare($expiredCheck);
+      $expiredStmt->bind_param('i', $code);
+      $expiredStmt->execute();
+      $expiredStmt->store_result();
+      
+      if ($expiredStmt->num_rows > 0) {
+        $err = "Verification code has expired. Please request a new one.";
+      } else {
+        $err = "Invalid code";
+      }
+      $expiredStmt->close();
     }
+    $checkStmt->close();
   }
 }
 require_once('partials/_inhead.php');
@@ -41,8 +52,11 @@ require_once('partials/_inhead.php');
       <div class="input-field buttons">
         <button type="submit" name="submit" style="background-color: #29126d">SUBMIT</button>
       </div>
-
-
+      <div class="links">
+        <p>Didn't receive a code? <a href="send_code.php">Resend Code</a></p>
+      </div>
+    </form>
+  </div>
 </body>
 <footer class="text-muted fixed-bottom mb-5">
   <div class="container">

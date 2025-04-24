@@ -1,11 +1,11 @@
 <?php
-$staff_id = $_SESSION['staff_id'];
-$login_id = $_SESSION['staff_id'];
-$ret = "SELECT * FROM   bnhs_staff  WHERE staff_id = '$staff_id'";
+$admin_id = $_SESSION['admin_id'];
+$login_id = $_SESSION['admin_id'];
+$ret = "SELECT * FROM   bnhs_admin  WHERE admin_id = '$admin_id'";
 $stmt = $mysqli->prepare($ret);
 $stmt->execute();
 $res = $stmt->get_result();
-while ($staff = $res->fetch_object()) {
+while ($admin = $res->fetch_object()) {
 
   ?>
   <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light" id="sidenav-main" style="background: linear-gradient(to bottom right, #d9f0ff, #ffffff);">

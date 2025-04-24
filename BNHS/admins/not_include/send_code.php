@@ -10,17 +10,17 @@ require 'assets\vendor\autoload.php'; // Adjusted path to vendor/autoload.php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-if (isset($_POST['add'])) {
-  if (empty($_POST['admin_email'])) {
+if (isset($_POST['send_code'])) {
+  if (empty($_POST['staff_email'])) {
     $err = "Email is required";
   } else {
-    $admin_email = $_POST['admin_email'];
+    $staff_email = $_POST['staff_email'];
 
     // Check if the email exists in the database
-    $checkQuery = "SELECT COUNT(*) FROM bnhs_admin WHERE admin_email = ?";
+    $checkQuery = "SELECT COUNT(*) FROM bnhs_staff WHERE staff_email = ?";
     $checkStmt = $mysqli->prepare($checkQuery);
     if ($checkStmt) {
-      $checkStmt->bind_param('s', $admin_email);
+      $checkStmt->bind_param('s', $staff_email);
       $checkStmt->execute();
       $checkStmt->bind_result($emailCount);
       $checkStmt->fetch();
@@ -33,10 +33,10 @@ if (isset($_POST['add'])) {
         $verification_code = rand(100000, 999999);
 
         // Store the code in the database (optional, if needed for verification later)
-        $codeQuery = "INSERT INTO verification_codes (email, code) VALUES (?, ?)";
+        $codeQuery = "INSERT INTO verification_codes (email, code, created_at) VALUES (?, ?, NOW())";
         $codeStmt = $mysqli->prepare($codeQuery);
         if ($codeStmt) {
-          $codeStmt->bind_param('ss', $admin_email, $verification_code);
+          $codeStmt->bind_param('ss', $staff_email, $verification_code);
           $codeStmt->execute();
         } else {
           $err = "Error: " . $mysqli->error;
@@ -56,21 +56,20 @@ if (isset($_POST['add'])) {
 
           // Recipients
           $mail->setFrom('no-reply@bnhs.com', 'BNHS Inventory System');
-          $mail->addAddress($admin_email);
+          $mail->addAddress($staff_email);
 
           // Content
           $mail->isHTML(true);
           $mail->Subject = 'Your Verification Code';
-          $mail->Body = "Your verification code is: <b>$verification_code</b><br><br>This code will expire in 10 minutes.";
-          $mail->AltBody = "Your verification code is: $verification_code\n\nThis code will expire in 10 minutes.";
+          $mail->Body = "Your verification code is: <b>$verification_code</b>";
 
           $mail->send();
-          $_SESSION['verify_email'] = $admin_email; // Store for verify_code and password change
-          $success = "Verification code sent successfully to $admin_email";
-          
+          $_SESSION['verify_email'] = $staff_email; // Store for verify_code and password change
+          $success = "Verification code sent successfully to $staff_email";
+
           header("Location: verify_code.php");
           exit;
-        
+
         } catch (Exception $e) {
           $err = "Failed to send the verification code. Mailer Error: {$mail->ErrorInfo}";
         }
@@ -90,21 +89,23 @@ require_once('partials/_inhead.php');
 
       <div class="field">
         <div class="input-fields">
-          <input type="email" placeholder="Email" name="admin_email" required>
+          <input type="email" placeholder="Email" name="staff_email" required>
         </div>
       </div>
 
       <div class="input-field buttons">
-        <button type="submit" name="add" style="background-color: #29126d">SEND CODE</button>
+        <button type="submit" name="send_code" style="background-color: #29126d">SEND CODE</button>
       </div>
-
+      <div class="links">
+        <p style="display: flex; justify-content: center;">Back to<a href="create_account.php" style="margin-left: 5px">Login</a></p>
+      </div>
     </form>
 </body>
 <footer class="text-muted fixed-bottom mb-5">
   <div class="container">
     <div class="row align-items-center">
       <div class="col-md-6 text-left text-md-start">
-        &copy; 2020 - <?php echo date('Y'); ?> - Developed By SOVATECH Company
+        &copy; 2024 - <?php echo date('Y'); ?> - Developed By SOVATECH Company
       </div>
       <div class="col-md-6 text-right text-md-end">
         <a href="#" class="nav-link" target="_blank">BNHS INVENTORY SYSTEM</a>
