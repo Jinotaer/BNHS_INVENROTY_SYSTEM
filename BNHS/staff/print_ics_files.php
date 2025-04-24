@@ -127,7 +127,7 @@ ob_start(); // Start output buffering
                                 <th class="tds" colspan="2">Issue</th>
                             </tr>
                             <tr>
-                                <th class="tds">Description</th>
+                                <th class="tds" style="width: 30%;">Description</th>
                                 <th class="tds">Quantity</th>
                                 <th class="tds">Yes</th>
                                 <th class="tds">No</th>

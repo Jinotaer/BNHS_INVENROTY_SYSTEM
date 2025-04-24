@@ -1,3 +1,29 @@
+<?php 
+session_start();
+
+// Check if user has verified with reCAPTCHA
+if (!isset($_SESSION['recaptcha_verified']) || $_SESSION['recaptcha_verified'] !== true) {
+    header('Location: verify.php');
+    exit();
+}
+
+require_once __DIR__ . "/BNHS/staff/assets/vendor/autoload.php";
+
+// Load environment variables
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+try {
+    $dotenv->load();
+} catch (Exception $e) {
+    die('Error loading .env file. Please ensure it exists and is readable.');
+}
+
+$sitekey = $_ENV['RECAPTCHA_SITE_KEY'] ?? '';
+
+
+
+
+
+?>
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <!-- For more projects: Visit codeastro.com  -->
@@ -169,9 +195,8 @@
                     <div>BNHS INVENTORY SYSTEM</div>
                 </div>
             </div>
-
             <div class="buttons">
-                <a href="BNHS/admin/" class="admin">Admin Log In</a>
+                <a href="BNHS/admins/" class="admin">Admin Log In</a>
                 <a href="BNHS/staff/" class="cashier">Staff Log In</a>
                 <!-- <a href="Main/customer/" class="customer">Customer Log In</a> -->
             </div>
@@ -179,4 +204,5 @@
     </div>
 </body>
 
+<script src="https://www.google.com/recaptcha/api.js"></script>
 </html>

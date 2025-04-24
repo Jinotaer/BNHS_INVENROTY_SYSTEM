@@ -16,6 +16,14 @@ if (isset($_POST['add'])) {
         $staff_password = sha1(md5($_POST['staff_password'])); // Hash This
         $staff_id = $_POST['staff_id'];
 
+      //   $stmt = $pdo->prepare("SELECT * FROM bnhs_staff WHERE staff_email = ?");
+      //   $stmt -> execute([$staff_email]);
+
+      //   if($stmt -> rowCount() > 0) {
+      //     $_SESSION['error'] = "Username already exists.";
+      //     header('Location: signup.php');
+      //     exit();
+      // } 
         // Insert Captured Information into the Database Table
         $postQuery = "INSERT INTO bnhs_staff (staff_id, staff_name, staff_phoneno, staff_email, staff_password) VALUES(?,?,?,?,?)";
         $postStmt = $mysqli->prepare($postQuery);
@@ -44,7 +52,7 @@ require_once('config/code-generator.php');
    <img src="assets/img/brand/bnhs.png" alt="This is a Logo" style="width: 120px; height: auto;">
    <form method="POST" rule="form">
    <div class="field">
-      <div class="input-fields" style="mar">
+      <div class="input-fields" style="">
         <input type="text" placeholder="ID" name="staff_id" required>
         <!-- <input class="form-control" value="<?php echo $cus_id;?>" required name="staff_id"  type="hidden"> -->
       </div>
