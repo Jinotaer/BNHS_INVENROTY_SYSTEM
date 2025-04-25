@@ -76,6 +76,20 @@ ob_start(); // Start output buffering
             display: block;
             margin: auto;
         }
+
+        tbody .tdnormal {
+            font-weight: normal;
+            font-size: 10px;
+        }
+
+        tbody .tds {
+            font-weight: normal;
+            font-size: 10px;
+        }
+
+        .table-light {
+            background-color: #f8f9fa;
+        }
     </style>
 </head>
 
@@ -91,7 +105,7 @@ ob_start(); // Start output buffering
             </div>
 
             <?php
-            $ret = "SELECT * FROM inventory_custodian_slip ORDER BY `created_at` DESC";
+            $ret = "SELECT * FROM requisition_and_issue_slip ORDER BY `created_at` DESC";
             $stmt = $mysqli->prepare($ret);
             $stmt->execute();
             $res = $stmt->get_result();
@@ -111,12 +125,12 @@ ob_start(); // Start output buffering
                     </tr>
                     <tr>
                         <td class="half" style="border: 1px solid black; padding: 5px;">
-                            <p>Division : <?php echo htmlspecialchars($iar->supplier ?? ''); ?></p> <br>
-                            <p>Office : <?php echo htmlspecialchars($iar->po_no_date ?? ''); ?></p> <br>
+                            <p><strong>Division :</strong> <?php echo htmlspecialchars($ics->division ?? ''); ?></p> <br>
+                            <p><strong>Office :</strong> <?php echo htmlspecialchars($ics->office ?? ''); ?></p> <br>
                         </td>
                         <td class="half" style="border: 1px solid black; padding: 5px;">
-                            <p>Responsibility Center Code : <?php echo htmlspecialchars($iar->iar_no ?? ''); ?></p> <br>
-                            <p> RIS No. : <?php echo htmlspecialchars($iar->iar_date ?? ''); ?></p> <br>
+                            <p><strong> Responsibility Center Code : </strong><?php echo htmlspecialchars($ics->responsibility_code ?? ''); ?></p> <br>
+                            <p> <strong>RIS No. :</strong> <?php echo htmlspecialchars($ics->ris_no ?? ''); ?></p> <br>
                         </td>
                     </tr>
                 </table>
@@ -143,19 +157,19 @@ ob_start(); // Start output buffering
                         </thead>
                         <tbody>
                             <?php
-                            $stmt->execute();
-                            $res = $stmt->get_result();
-                            while ($ics = $res->fetch_object()) {
+                            // Reset the result pointer
+                            $res->data_seek(0);
+                            while ($row = $res->fetch_object()) {
                             ?>
                                 <tr>
-                                    <td class="tds"><?php echo htmlspecialchars($ics->quantity ?? ''); ?></td>
-                                    <td class="tds"><?php echo htmlspecialchars($ics->quantity ?? ''); ?></td>
-                                    <td class="tds"><?php echo htmlspecialchars($ics->unit ?? ''); ?></td>
-                                    <td class="tds"><?php echo htmlspecialchars($ics->unit_cost ?? ''); ?></td>
-                                    <td class="tds"><?php echo htmlspecialchars($ics->total_cost ?? ''); ?></td>
-                                    <td class="tds"><?php echo htmlspecialchars($ics->total_cost ?? ''); ?></td>
-                                    <td class="tds"><?php echo htmlspecialchars($ics->inventory_item_no ?? ''); ?></td>
-                                    <td class="tds"><?php echo htmlspecialchars($ics->estimated_useful_life ?? ''); ?></td>
+                                    <td class="tds"><?php echo htmlspecialchars($row->stock_no ?? ''); ?></td>
+                                    <td class="tds"><?php echo htmlspecialchars($row->unit ?? ''); ?></td>
+                                    <td class="tds"><?php echo htmlspecialchars($row->item_description ?? ''); ?></td>
+                                    <td class="tds"><?php echo htmlspecialchars($row->requested_qty ?? ''); ?></td>
+                                    <td class="tds"><?php echo htmlspecialchars($row->stock_available_yes ?? ''); ?></td>
+                                    <td class="tds"><?php echo htmlspecialchars($row->stock_available_no ?? ''); ?></td>
+                                    <td class="tds"><?php echo htmlspecialchars($row->issued_qty ?? ''); ?></td>
+                                    <td class="tds"><?php echo htmlspecialchars($row->remarks ?? ''); ?></td>
                                 </tr>
                             <?php } ?>
                         </tbody>
@@ -164,7 +178,7 @@ ob_start(); // Start output buffering
             <?php } ?>
 
             <?php
-            $ret = "SELECT * FROM inventory_custodian_slip ORDER BY `created_at` DESC";
+            $ret = "SELECT * FROM requisition_and_issue_slip ORDER BY `created_at` DESC";
             $stmt = $mysqli->prepare($ret);
             $stmt->execute();
             $res = $stmt->get_result();
@@ -175,7 +189,7 @@ ob_start(); // Start output buffering
             <table border="1" cellspacing="0" cellpadding="5" style="border-collapse: collapse; width: 100%;">
                 <tr>
                     <td style="width: 15%; vertical-align: top; height: 30px;"><strong>Purpose:</strong></td>
-                    <td style="height: 30px;"><?php echo htmlspecialchars($ics->inventory_item_no ?? ''); ?></td>
+                    <td style="height: 30px;"><?php echo htmlspecialchars($ics->purpose ?? ''); ?></td>
                     <br>
                     <br>
                     <br>
@@ -203,24 +217,24 @@ ob_start(); // Start output buffering
                     </tr>
                     <tr>
                         <th style="text-align: left;">Print Name:</th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
+                        <th class="tdnormal"><?php echo htmlspecialchars($ics->requested_by_name ?? ''); ?></th>
+                        <th class="tdnormal"><?php echo htmlspecialchars($ics->approved_by_name ?? ''); ?></th>
+                        <th class="tdnormal"><?php echo htmlspecialchars($ics->issued_by_name ?? ''); ?></th>
+                        <th class="tdnormal"><?php echo htmlspecialchars($ics->received_by_name ?? ''); ?></th>
                     </tr>
                     <tr>
                         <th style="text-align: left;">Designation :</th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
+                        <th class="tdnormal"><?php echo htmlspecialchars($ics->requested_by_designation ?? ''); ?></th>
+                        <th class="tdnormal"><?php echo htmlspecialchars($ics->approved_by_designation ?? ''); ?></th>
+                        <th class="tdnormal"><?php echo htmlspecialchars($ics->issued_by_designation ?? ''); ?></th>
+                        <th class="tdnormal"><?php echo htmlspecialchars($ics->received_by_designation ?? ''); ?></th>
                     </tr>
                     <tr>
                         <th style="text-align: left;">Date :</th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
+                        <th class="tdnormal"><?php echo htmlspecialchars($ics->requested_by_date ?? ''); ?></th>
+                        <th class="tdnormal"><?php echo htmlspecialchars($ics->approved_by_date ?? ''); ?></th>
+                        <th class="tdnormal"><?php echo htmlspecialchars($ics->issued_by_date ?? ''); ?></th>
+                        <th class="tdnormal"><?php echo htmlspecialchars($ics->received_by_date ?? ''); ?></th>
                     </tr>
                 </tbody>
             </table>

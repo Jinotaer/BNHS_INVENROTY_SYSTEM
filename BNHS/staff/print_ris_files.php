@@ -81,10 +81,12 @@ ob_start(); // Start output buffering
             font-weight: normal;
             font-size: 10px;
         }
+
         tbody .tds {
             font-weight: normal;
             font-size: 10px;
         }
+
         .table-light {
             background-color: #f8f9fa;
         }
@@ -128,7 +130,7 @@ ob_start(); // Start output buffering
                         </td>
                         <td class="half" style="border: 1px solid black; padding: 5px;">
                             <p><strong> Responsibility Center Code : </strong><?php echo htmlspecialchars($ics->responsibility_code ?? ''); ?></p> <br>
-                            <p> <strong>RIS No. :</strong>  <?php echo htmlspecialchars($ics->ris_no ?? ''); ?></p> <br>
+                            <p> <strong>RIS No. :</strong> <?php echo htmlspecialchars($ics->ris_no ?? ''); ?></p> <br>
                         </td>
                     </tr>
                 </table>

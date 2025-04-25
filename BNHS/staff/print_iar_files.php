@@ -76,10 +76,11 @@ ob_start(); // Start output buffering
       display: block;
       margin: auto;
     }
+
     tbody .tds {
-            font-weight: normal;
-            font-size: 10px;
-        }
+      font-weight: normal;
+      font-size: 10px;
+    }
   </style>
 </head>
 
@@ -139,11 +140,11 @@ ob_start(); // Start output buffering
             </tr>
           </thead>
           <tbody>
-            <?php 
+            <?php
             // Reset the result pointer to show all items
             $res->data_seek(0);
             $total_amount = 0;
-            while ($item = $res->fetch_object()) { 
+            while ($item = $res->fetch_object()) {
               $total_amount += $item->total_price ?? 0;
             ?>
               <tr>

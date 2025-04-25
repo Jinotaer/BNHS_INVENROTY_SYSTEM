@@ -93,7 +93,7 @@ require_once('partials/_head.php');
     $stmt->execute();
     $res = $stmt->get_result();
     while ($admin = $res->fetch_object()) {
-      ?>
+    ?>
       <!-- Header -->
       <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
         style="min-height: 600px; background-image: url(assets/img/theme/bnhsfront.jpg); background-size: cover; background-position: center top;">
@@ -171,80 +171,75 @@ require_once('partials/_head.php');
                       <div class="col-lg-6">
                         <div class="form-group">
                           <label class="form-control-label" for="input-username">User Name</label>
-                          <input type="text" name="admin_name" value="<?php echo $admin->admin_name; ?>"
-                            id="input-username" class="form-control form-control-alternative" ">
-                              </div>
-                            </div>
-                            <div class=" col-lg-6">
-                          <div class="form-group">
-                            <label class="form-control-label" for="input-email">Email address</label>
-                            <input type="email" id="input-email" value="<?php echo $admin->admin_email; ?>"
-                              name="admin_email" class="form-control form-control-alternative">
-                          </div>
+                          <input style="color: black;" type="text" name="admin_name" value="<?php echo $admin->admin_name; ?>"
+                            id="input-username" class="form-control form-control-alternative">
                         </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label class="form-control-label" for="input-email">Email address</label>
+                          <input style="color: black;" type="email" id="input-email" value="<?php echo $admin->admin_email; ?>"
+                            name="admin_email" class="form-control form-control-alternative">
+                        </div>
+                      </div>
 
-                        <div class="col-lg-12">
-                          <div class="form-group">
-                            <input type="submit" id="input-email" name="ChangeProfile"
-                              class="btn btn-success form-control-alternative" value="Submit"">
+                      <div class="col-lg-12">
+                        <div class="form-group">
+                          <input type="submit" id="input-email" name="ChangeProfile"
+                            class="btn btn-primary form-control-alternative" value="Submit">
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </form>
-              <hr>
-              <form method =" post">
-                            <h6 class="heading-small text-muted mb-4">Change Password</h6>
-                            <div class="pl-lg-4">
-                              <div class="row">
-                                <div class="col-lg-12">
-                                  <div class="form-group">
-                                    <!-- Form field for entering the old password -->
-                                    <label class="form-control-label" for="input-username">Old Password</label>
-                                    <input type="password" name="old_password" id="input-username"
-                                      class="form-control form-control-alternative">
-                                  </div>
-                                </div>
+                </form>
+                <hr>
+                <form method="post">
+                  <h6 class="heading-small text-muted mb-4">Change Password</h6>
+                  <div class="pl-lg-4">
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <div class="form-group">
+                          <label class="form-control-label" for="input-username">Old Password</label>
+                          <input style="color: black;" type="password" name="old_password" id="input-username"
+                            class="form-control form-control-alternative">
+                        </div>
+                      </div>
 
-                                <div class="col-lg-12">
-                                  <div class="form-group">
-                                    <!-- Form field for entering the new password -->
-                                    <label class="form-control-label" for="input-email">New Password</label>
-                                    <input type="password" name="new_password"
-                                      class="form-control form-control-alternative">
-                                  </div>
-                                </div>
+                      <div class="col-lg-12">
+                        <div class="form-group">
+                          <label class="form-control-label" for="input-email">New Password</label>
+                          <input style="color: black;" type="password" name="new_password"
+                            class="form-control form-control-alternative">
+                        </div>
+                      </div>
 
-                                <div class="col-lg-12">
-                                  <div class="form-group">
-                                    <!-- Form field for confirming the new password -->
-                                    <label class="form-control-label" for="input-email">Confirm New Password</label>
-                                    <input type="password" name="confirm_password"
-                                      class="form-control form-control-alternative">
-                                  </div>
-                                </div>
+                      <div class="col-lg-12">
+                        <div class="form-group">
+                          <label class="form-control-label" for="input-email">Confirm New Password</label>
+                          <input style="color: black;" type="password" name="confirm_password"
+                            class="form-control form-control-alternative">
+                        </div>
+                      </div>
 
-                                <div class="col-lg-12">
-                                  <div class="form-group">
-                                    <!-- Submit button for changing the password -->
-                                    <input type="submit" id="input-email" name="changePassword"
-                                      class="btn btn-success form-control-alternative" value="Change Password">
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+                      <div class="col-lg-12">
+                        <div class="form-group">
+                          <input type="submit" id="input-email" name="changePassword"
+                            class="btn btn-primary form-control-alternative" value="Change Password">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </form>
               </div>
             </div>
           </div>
         </div>
         <!-- Footer -->
-        <?php
-        require_once('partials/_mainfooter.php');
+      <?php
+      require_once('partials/_mainfooter.php');
     }
-    ?>
-    </div>
+      ?>
+      </div>
   </div>
   <!-- Argon Scripts -->
   <?php

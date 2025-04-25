@@ -30,7 +30,7 @@ if (isset($_GET['item']) && !empty(trim($_GET['item']))) {
     'inspection_acceptance_reports',
     'inventory_custodian_slip',
     'requisition_and_issue_slip',
-    'property_acknowledgement_receipt'
+    'property_acknowledgment_receipt'
   ];
   
   foreach ($tables as $table) {
@@ -112,7 +112,7 @@ require_once('partials/_head.php');
                     foreach ($searchResults as $item) {
                       ?>
                       <tr>
-                        <td><?php echo ucfirst(str_replace('_', ' ', $item->source_table)); ?></td>
+                        <td ><?php echo ucfirst(str_replace('_', ' ', $item->source_table)); ?></td>
                         <td><?php echo $item->item_description ?? 'N/A'; ?></td>
                         <td><?php echo $item->iar_no ?? $item->ics_no ?? $item->ris_no ?? $item->par_no ?? 'N/A'; ?></td>
                         <td><?php echo $item->receiver_name ?? $item->end_user_name ?? $item->received_by_name ?? 'N/A'; ?></td>
@@ -141,7 +141,7 @@ require_once('partials/_head.php');
                       'inspection_acceptance_reports',
                       'inventory_custodian_slip',
                       'requisition_and_issue_slip',
-                      'property_acknowledgement_receipt'
+                      'property_acknowledgment_receipt'
                     ];
                     
                     foreach ($tables as $table) {
