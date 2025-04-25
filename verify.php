@@ -1,4 +1,4 @@
-<!-- <?php
+<?php
 session_start();
 require_once __DIR__ . "/BNHS/staff/assets/vendor/autoload.php";
 
@@ -105,4 +105,4 @@ if (isset($_POST['g-recaptcha-response'])) {
         
     </script>
 </body>
-</html>  -->
+</html> 

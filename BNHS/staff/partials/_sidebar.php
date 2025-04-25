@@ -91,7 +91,7 @@ while ($staff = $res->fetch_object()) {
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="track_inventory copy.php">
+            <a class="nav-link" href="track_inventory.php">
               <i><span class="material-icons-sharp text-primary">plagiarism</span></i> Track Inventory
             </a>
           </li>

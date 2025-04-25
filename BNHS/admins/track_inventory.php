@@ -143,12 +143,12 @@ require_once('partials/_head.php');
                               <a href="view_item.php?id=<?php echo $item['id'] ?? ''; ?>&table=<?php echo $item['source_table']; ?>">
                                 <button class="btn btn-sm btn-info"><i class="fas fa-eye"></i> View</button>
                               </a>
-                              <a href="track_inventory.php?delete=<?php echo $item['id'] ?? ''; ?>&table=<?php echo $item['source_table']; ?>">
+                              <!-- <a href="track_inventory.php?delete=<?php echo $item['id'] ?? ''; ?>&table=<?php echo $item['source_table']; ?>">
                                 <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Delete</button>
                               </a>
                               <a href="track_inventory_update.php?id=<?php echo $item['id'] ?? ''; ?>&table=<?php echo $item['source_table']; ?>">
                                 <button class="btn btn-sm btn-primary"><i class="fas fa-user-edit"></i> Update</button>
-                              </a>
+                              </a> -->
                             </td>
                           </tr>
                   <?php

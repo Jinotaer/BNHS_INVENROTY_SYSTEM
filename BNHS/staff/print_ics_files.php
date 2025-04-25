@@ -76,6 +76,11 @@ ob_start(); // Start output buffering
             display: block;
             margin: auto;
         }
+
+        tbody .tds {
+            font-weight: normal;
+            font-size: 10px;
+        }
     </style>
 </head>
 
@@ -120,19 +125,16 @@ ob_start(); // Start output buffering
                     <table class="table table-bordered text-center align-middle">
                         <thead class="table-light">
                             <tr>
-                                <th class="tds" rowspan="2">Stock No.</th>
+                                <th class="tds" rowspan="2">Quantity</th>
                                 <th class="tds" rowspan="2">Unit</th>
-                                <th class="tds" colspan="2">Requisition</th>
-                                <th class="tds" colspan="2">Stock Available?</th>
-                                <th class="tds" colspan="2">Issue</th>
+                                <th class="tds" colspan="2">Amount</th>
+                                <th class="tds" rowspan="2" style="width: 30%;">Description</th>
+                                <th class="tds" rowspan="2">'Inventory Item No.</th>
+                                <th class="tds" rowspan="2">Estimated Useful Life</th>
                             </tr>
                             <tr>
-                                <th class="tds" style="width: 30%;">Description</th>
-                                <th class="tds">Quantity</th>
-                                <th class="tds">Yes</th>
-                                <th class="tds">No</th>
-                                <th class="tds">Quantity</th>
-                                <th class="tds">Remarks</th>
+                                <th class="tds">Unit Cost</th>
+                                <th class="tds">Total Cost</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -142,14 +144,13 @@ ob_start(); // Start output buffering
                             while ($ics = $res->fetch_object()) {
                             ?>
                                 <tr>
-                                    <td class="tds"><?php echo htmlspecialchars($ics->stock_no ?? ''); ?></td>
+                                    <td class="tds"><?php echo htmlspecialchars($ics->quantity ?? ''); ?></td>
                                     <td class="tds"><?php echo htmlspecialchars($ics->unit ?? ''); ?></td>
-                                    <td class="tds"><?php echo htmlspecialchars($ics->description ?? ''); ?></td>
-                                    <td class="tds"><?php echo htmlspecialchars($ics->requisition_qty ?? ''); ?></td>
-                                    <td class="tds"><?php echo htmlspecialchars($ics->stock_available_yes ?? ''); ?></td>
-                                    <td class="tds"><?php echo htmlspecialchars($ics->stock_available_no ?? ''); ?></td>
-                                    <td class="tds"><?php echo htmlspecialchars($ics->issue_qty ?? ''); ?></td>
-                                    <td class="tds"><?php echo htmlspecialchars($ics->remarks ?? ''); ?></td>
+                                    <td class="tds"><?php echo htmlspecialchars($ics->unit_cost ?? ''); ?></td>
+                                    <td class="tds"><?php echo htmlspecialchars($ics->total_amount ?? ''); ?></td>
+                                    <td class="tds"><?php echo htmlspecialchars($ics->item_description ?? ''); ?></td>
+                                    <td class="tds"><?php echo htmlspecialchars($ics->inventory_item_no ?? ''); ?></td>
+                                    <td class="tds"><?php echo htmlspecialchars($ics->estimated_life ?? ''); ?></td>
                                 </tr>
                             <?php } ?>
                         </tbody>

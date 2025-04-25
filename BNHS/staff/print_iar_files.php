@@ -76,6 +76,10 @@ ob_start(); // Start output buffering
       display: block;
       margin: auto;
     }
+    tbody .tds {
+            font-weight: normal;
+            font-size: 10px;
+        }
   </style>
 </head>
 
@@ -95,30 +99,31 @@ ob_start(); // Start output buffering
       $stmt = $mysqli->prepare($ret);
       $stmt->execute();
       $res = $stmt->get_result();
+      $header_data = $res->fetch_object(); // Get header data
       ?>
 
       <table>
         <tr>
           <td class="half">
-            <p><strong>Entity Name : </strong><?php echo htmlspecialchars($iar->entity_name ?? ''); ?></p>
-
+            <p><strong>Entity Name : </strong><?php echo htmlspecialchars($header_data->entity_name ?? ''); ?></p>
+          </td>
           <td class="half">
-            <p><strong>Fund Cluster : </strong><?php echo htmlspecialchars($iar->fund_cluster ?? ''); ?></p>
+            <p><strong>Fund Cluster : </strong><?php echo htmlspecialchars($header_data->fund_cluster ?? ''); ?></p>
             <br>
           </td>
         </tr>
         <br>
         <tr>
           <td class="half" style="border: 1px solid black; padding: 5px;">
-            <p>Supplier : <?php echo htmlspecialchars($iar->supplier ?? ''); ?></p> <br>
-            <p>PO No./Date : <?php echo htmlspecialchars($iar->po_no_date ?? ''); ?></p> <br>
-            <p>Requisitioning Office/Dept. : <?php echo htmlspecialchars($iar->req_office ?? ''); ?></p> <br>
-            <p> Responsibility Center Code : <?php echo htmlspecialchars($iar->responsibility_center ?? ''); ?></p> <br>
+            <p><strong>Supplier :</strong> <?php echo htmlspecialchars($header_data->supplier ?? ''); ?></p> <br>
+            <p><strong>PO No./Date :</strong> <?php echo htmlspecialchars($header_data->po_no_date ?? ''); ?></p> <br>
+            <p><strong>Requisitioning Office/Dept. :</strong> <?php echo htmlspecialchars($header_data->req_office ?? ''); ?></p> <br>
+            <p><strong>Responsibility Center Code :</strong> <?php echo htmlspecialchars($header_data->responsibility_center ?? ''); ?></p> <br>
           </td>
           <td class="half" style="border: 1px solid black; padding: 5px;">
-            <p>IAR No. : <?php echo htmlspecialchars($iar->iar_no ?? ''); ?></p> <br>
-            <p> Date : <?php echo htmlspecialchars($iar->iar_date ?? ''); ?></p> <br>
-            <p> Invoice No. : <?php echo htmlspecialchars($iar->stock_no ?? ''); ?></p> <br>
+            <p><strong>IAR No. :</strong> <?php echo htmlspecialchars($header_data->iar_no ?? ''); ?></p> <br>
+            <p><strong>Date :</strong> <?php echo htmlspecialchars($header_data->iar_date ?? ''); ?></p> <br>
+            <p><strong>Invoice No. :</strong> <?php echo htmlspecialchars($header_data->stock_no ?? ''); ?></p> <br>
           </td>
         </tr>
       </table>
@@ -134,36 +139,41 @@ ob_start(); // Start output buffering
             </tr>
           </thead>
           <tbody>
-            <?php while ($iar = $res->fetch_object()) { ?>
+            <?php 
+            // Reset the result pointer to show all items
+            $res->data_seek(0);
+            $total_amount = 0;
+            while ($item = $res->fetch_object()) { 
+              $total_amount += $item->total_price ?? 0;
+            ?>
               <tr>
-                <td class="tds"><?php echo htmlspecialchars($iar->stock_property_no ?? ''); ?></td>
-                <td class="tds"><?php echo htmlspecialchars($iar->item_description ?? ''); ?></td>
-                <td class="tds"><?php echo htmlspecialchars($iar->unit ?? ''); ?></td>
+                <td class="tds"><?php echo htmlspecialchars($item->stock_no ?? ''); ?></td>
+                <td class="tds"><?php echo htmlspecialchars($item->item_description ?? ''); ?></td>
+                <td class="tds"><?php echo htmlspecialchars($item->unit ?? ''); ?></td>
                 <td class="tds">
-                  Qty: <?php echo htmlspecialchars($iar->quantity ?? ''); ?><br>
-                  Cost: ₱<?php echo htmlspecialchars($iar->unit_price ?? ''); ?><br>
-                  Total: ₱<?php echo htmlspecialchars($iar->total_price ?? ''); ?>
+                  Qty: <?php echo htmlspecialchars($item->quantity ?? ''); ?><br>
+                  Cost: ₱<?php echo htmlspecialchars($item->unit_price ?? ''); ?><br>
+                  Total: ₱<?php echo htmlspecialchars($item->total_price ?? ''); ?>
                 </td>
               </tr>
             <?php } ?>
             <tr>
               <td colspan="3" class="text-end tds"><strong>TOTAL AMOUNT</strong></td>
-              <td class="tds">₱<?php echo htmlspecialchars($iar->total_price ?? ''); ?></td>
+              <td class="tds">₱<?php echo number_format($total_amount, 2); ?></td>
             </tr>
           </tbody>
         </table>
       </div>
+
       <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
         <tr>
           <!-- Left: Inspection Section -->
           <td style="border: 1px solid black; padding: 10px; vertical-align: top; width: 50%;">
-
-            <p><strong>Date Inspected:</strong> __________________</p>
+            <p><strong>Date Inspected:</strong> <?php echo htmlspecialchars($header_data->date_inspected ?? ''); ?></p>
             <br>
             <br>
             <p style="margin: 20px 0 0;">
-              <input type="checkbox"
-                style="width: 50px; height: 50px; vertical-align: middle; margin-right: 8px;">
+              <input type="checkbox" style="width: 50px; height: 50px; vertical-align: middle; margin-right: 8px;">
               Inspected, verified, and found in order as to quantity and specifications
             </p>
             <br>
@@ -172,27 +182,23 @@ ob_start(); // Start output buffering
             <br>
             <br>
             <br>
-            <p>Inspection Officer/Inspection Committee</p>
-            <br>
-            <br>
+            <p><?php echo htmlspecialchars($header_data->inspectors ?? ''); ?></p>
+            <p>_________________________________________</p>
             <p>Inspection Officer/Inspection Committee</p>
           </td>
 
           <!-- Right: Receiving Section -->
           <td style="border: 1px solid black; padding: 10px; vertical-align: top; width: 50%;">
-
-            <p><strong>Date Received:</strong> __________________</p>
+            <p><strong>Date Received:</strong> <?php echo htmlspecialchars($header_data->date_received ?? ''); ?></p>
             <br>
             <br>
             <p style="margin-top: 40px;">
-              <input type="checkbox"
-                style="width: 55px; height: 55px; vertical-align: middle; margin-right: 8px;">
+              <input type="checkbox" style="width: 55px; height: 55px; vertical-align: middle; margin-right: 8px;">
               Complete
             </p>
             <br>
             <p style="margin-top: 20px;">
-              <input type="checkbox"
-                style="width: 50px; height: 50px; vertical-align: middle; margin-right: 8px;">
+              <input type="checkbox" style="width: 50px; height: 50px; vertical-align: middle; margin-right: 8px;">
               Partial (pls. specify quantity)
             </p>
             <br>
@@ -201,6 +207,8 @@ ob_start(); // Start output buffering
             <br>
             <br>
             <br>
+            <p style="text-align: center;"><?php echo htmlspecialchars($header_data->property_custodian ?? ''); ?></p>
+            <p>_____________________________</p>
             <p style="justify-content: center; align-items: center;">Supply & Property Custodian</p>
           </td>
         </tr>

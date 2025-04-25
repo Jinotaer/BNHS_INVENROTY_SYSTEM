@@ -70,10 +70,10 @@ require_once('partials/_head.php');
                     <th scope="col">Responsibility Center</th>
                     <th scope="col">IAR No.</th>
                     <th scope="col">IAR Date</th>
-                    <th scope="col">Unit Cost</th>
                     <th scope="col">Invoice No. / Date</th>
-                    <th scope="col">Stock / Property No.</th>
+                    <th scope="col">Stock No.</th>
                     <th scope="col">Remarks</th>
+                    <th scope="col">Item Description</th>
                     <th scope="col">Unit</th>
                     <th scope="col">Quantity</th>
                     <th scope="col">Unit Price</th>
@@ -83,6 +83,7 @@ require_once('partials/_head.php');
                     <th scope="col">Position</th>
                     <th scope="col">Date Inspected</th>
                     <th scope="col">Inspection Team</th>
+                    <th scope="col">Barangay Councilor</th>
                     <th scope="col">PTA Observer</th>
                     <th scope="col">Date Received</th>
                     <th scope="col">Property Custodian</th>
@@ -106,6 +107,7 @@ require_once('partials/_head.php');
                       <td><?php echo $iar->responsibility_center; ?></td>
                       <td><?php echo $iar->iar_no; ?></td>
                       <td><?php echo $iar->iar_date; ?></td>
+                      <td><?php echo $iar->invoice_no_date; ?></td>
                       <td><?php echo $iar->stock_no; ?></td>
                       <td><?php echo $iar->remarks; ?></td>
                       <td><?php echo $iar->item_description; ?></td>

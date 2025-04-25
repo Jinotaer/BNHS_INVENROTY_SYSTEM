@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
   }
 
   $stmt->bind_param(
-    "sssssssssiiissssssssssssss",
+    "sssssssssisissssssssssssss",
     $entity_name, $fund_cluster, $division, $office, $responsibility_code, $ris_no, $stock_no, $unit, $item_description, $requested_qty, $stock_available, $issued_qty, $remarks, $purpose, $requested_by_name, $requested_by_designation, $requested_by_date, $approved_by_name, $approved_by_designation, $approved_by_date, $issued_by_name,$issued_by_designation, $issued_by_date, $received_by_name, $received_by_designation, $received_by_date
   );
 
@@ -178,8 +178,8 @@ require_once('partials/_head.php');
                     <div class="col-md-3">
                       <label class="form-label">Stock Available (Yes/No)</label>
                       <select style="color: #000000;" class="form-control" name="stock_available" required>
-                        <option value="Yes">Yes</option>
-                        <option value="No">No</option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
                       </select>
                     </div>
                     <div class="col-md-3">

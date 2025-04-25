@@ -91,7 +91,7 @@ ob_start(); // Start output buffering
             </div>
 
             <?php
-            $ret = "SELECT * FROM inventory_custodian_slip ORDER BY `created_at` DESC";
+            $ret = "SELECT * FROM purchase_request_slip ORDER BY `created_at` DESC";
             $stmt = $mysqli->prepare($ret);
             $stmt->execute();
             $res = $stmt->get_result();
@@ -139,7 +139,7 @@ ob_start(); // Start output buffering
                                 <tr>
                                     <td class="tds"><?php echo htmlspecialchars($ics->stock_no ?? ''); ?></td>
                                     <td class="tds"><?php echo htmlspecialchars($ics->unit ?? ''); ?></td>
-                                    <td class="tds"><?php echo htmlspecialchars($ics->description ?? ''); ?></td>
+                                    <td class="tds"><?php echo htmlspecialchars($ics->item_description ?? ''); ?></td>
                                     <td class="tds"><?php echo htmlspecialchars($ics->requisition_qty ?? ''); ?></td>
                                     <td class="tds"><?php echo htmlspecialchars($ics->stock_available_yes ?? ''); ?></td>
                                     <td class="tds"><?php echo htmlspecialchars($ics->stock_available_no ?? ''); ?></td>
@@ -151,7 +151,7 @@ ob_start(); // Start output buffering
             <?php } ?>
 
             <?php
-            $ret = "SELECT * FROM inventory_custodian_slip ORDER BY `created_at` DESC";
+            $ret = "SELECT * FROM purchase_request_slip ORDER BY `created_at` DESC";
             $stmt = $mysqli->prepare($ret);
             $stmt->execute();
             $res = $stmt->get_result();
